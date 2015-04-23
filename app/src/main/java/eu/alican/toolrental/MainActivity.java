@@ -10,6 +10,8 @@ import android.widget.Spinner;
 
 import java.util.ArrayList;
 
+import eu.alican.toolrental.utls.FetchJsonTask;
+
 
 public class MainActivity extends ActionBarActivity {
     @Override
@@ -23,6 +25,9 @@ public class MainActivity extends ActionBarActivity {
         ArrayList<String> categories = new ArrayList<>();
         categories.add("Test");
         categories.add("Test 2");
+
+        FetchJsonTask weatherTask = new FetchJsonTask(MainActivity.this);
+        weatherTask.execute();
 
         Spinner categorySpinner = (Spinner) findViewById(R.id.category_spinner);
         ArrayAdapter<String> adapter = new ArrayAdapter<>(this,

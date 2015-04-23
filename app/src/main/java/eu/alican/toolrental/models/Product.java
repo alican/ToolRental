@@ -10,6 +10,17 @@ public class Product {
     private String description;
     private int productId;
     private String manufactorId;
+    private int price;
+
+
+
+    public int getPrice() {
+        return price;
+    }
+
+    public void setPrice(int price) {
+        this.price = price;
+    }
 
     public int getId() {
         return _id;
