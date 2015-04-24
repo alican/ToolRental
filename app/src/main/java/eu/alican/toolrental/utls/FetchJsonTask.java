@@ -53,15 +53,16 @@ public class FetchJsonTask extends AsyncTask<String, Void, String[]> {
             for (int i = 0; i < productArray.length(); i++) {
                 JSONObject obj = productArray.getJSONObject(i);
                 String name = obj.getString(JSON_NAME);
-                String price = obj.getString(JSON_PRICE);
+                int price = obj.getInt(JSON_PRICE);
                 String description = obj.getString(JSON_DESC);
                 String productId = obj.getString(JSON_PID);
-                String category = obj.getString(JSON_CATEGORY);
+                int category = obj.getInt(JSON_CATEGORY);
 
                 ContentValues productValues = new ContentValues();
                 productValues.put(MyDbHandler.ProductEntry.COLUMN_NAME, name);
                 productValues.put(MyDbHandler.ProductEntry.COLUMN_PRICE, price);
                 productValues.put(MyDbHandler.ProductEntry.COLUMN_DESC, description);
+                productValues.put(MyDbHandler.ProductEntry.COLUMN_CATEGORY, category);
                 // TODO rest implementieren
 
 

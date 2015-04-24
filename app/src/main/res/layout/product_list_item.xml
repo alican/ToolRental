@@ -2,13 +2,24 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="horizontal" >
+    android:orientation="vertical" >
+
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="200dp"
+        android:id="@+id/imageView"
+        android:src="@drawable/image4"
+        android:scaleType="centerCrop"
+        
+        />
+
     <TextView
         android:id="@+id/tvBody"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Study cursors"
-        android:textAppearance="?android:attr/textAppearanceLarge" />
+        android:text="Name"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        />
     <TextView
         android:id="@+id/tvPriority"
         android:layout_width="wrap_content"
@@ -16,4 +27,5 @@
         android:layout_marginLeft="10dp"
         android:text="3"
         android:textAppearance="?android:attr/textAppearanceMedium" />
+
 </LinearLayout>

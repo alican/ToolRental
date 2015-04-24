@@ -1,19 +1,32 @@
 package eu.alican.toolrental;
 
+import android.content.Intent;
+import android.database.Cursor;
+import android.database.sqlite.SQLiteDatabase;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.ListView;
 import android.widget.Spinner;
 
 import java.util.ArrayList;
 
+import eu.alican.toolrental.adapter.ProductAdapter;
+import eu.alican.toolrental.db.MyDbHandler;
 import eu.alican.toolrental.utls.FetchJsonTask;
 
 
 public class MainActivity extends ActionBarActivity {
+    public MyDbHandler handler;
+    public Cursor productCursor;
+    public  ProductAdapter productAdapter;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -23,11 +36,18 @@ public class MainActivity extends ActionBarActivity {
         setSupportActionBar(toolbar);
 
         ArrayList<String> categories = new ArrayList<>();
-        categories.add("Test");
-        categories.add("Test 2");
+        categories.add("Alle");
+        categories.add("0");
+        categories.add("1");
+        categories.add("2");
+        categories.add("3");
 
         FetchJsonTask weatherTask = new FetchJsonTask(MainActivity.this);
         weatherTask.execute();
+
+        MyDbHandler handler = new MyDbHandler(this, null, null, 1);
+        SQLiteDatabase db = handler.getWritableDatabase();
+
 
         Spinner categorySpinner = (Spinner) findViewById(R.id.category_spinner);
         ArrayAdapter<String> adapter = new ArrayAdapter<>(this,
@@ -36,6 +56,44 @@ public class MainActivity extends ActionBarActivity {
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         categorySpinner.setAdapter(adapter);
 
+        categorySpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            public void onItemSelected(AdapterView<?> arg0, View arg1,
+                                       int arg2, long arg3) {
+                fetchProductsFromDb(arg2-1);
+
+            }
+
+            public void onNothingSelected(AdapterView<?> arg0) {
+                Log.e("klkl", "nothing");
+
+            }
+        });
+
+        fetchProductsFromDb(-1);
+        ListView lvItems = (ListView) findViewById(R.id.listView);
+
+        lvItems.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                Intent intent = new Intent(MainActivity.this, DetailActivity.class);
+
+                productCursor.moveToPosition(position);
+                int productId = productCursor.getInt(0);
+                intent.putExtra("productId", productId);
+                startActivity(intent);
+
+            }
+        });
+
+
+    }
+    public void fetchProductsFromDb(int category){
+        handler = new MyDbHandler(this, null, null, 1);
+        productCursor = handler.getProducts(category);
+
+        productAdapter = new ProductAdapter(this, productCursor);
+        ListView lvItems = (ListView) findViewById(R.id.listView);
+        lvItems.setAdapter(productAdapter);
 
     }
 
