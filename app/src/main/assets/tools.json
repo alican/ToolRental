@@ -1,0 +1,52 @@
+[
+
+	{
+		"id": 0,
+		"name":"Makita HR2811FT Kombihammer" ,
+		"description": "Zum Bohren, Hammerbohren und Meißeln Mit zusätzlicher Vibrationsdämpfung durch Feder gelagerten Handgriff Rutschkupplung Elektronisch regelbare Dreh- und Schlagzahl Handgriff mit eingelegtem Gummipolster für sicheren Halt und bequemes Arbeiten Mit leuchtstarker LED Mitgeliefertes Zubehör: Transportkoffer Tiefenanschlag Stabseitengriff ",
+		"productId": "HR2811FT-240V",
+		"category": 0,
+		"price": 15
+	},
+	{
+		"id": 1,
+		"name":"Bosch Professional GBH 2-20 D Bohrhammer" ,
+		"description": " Der GBH 2-20 D Professional ist der kleinste und handlichste SDS-plus-Boschhammer – und dennoch ein Hochleistungswerkzeug. Er misst nur 32,5 cm und wiegt 2,3 Kilogramm. Durch die zusätzliche Meißelfunktion bietet er vielseitige Anwendungsmöglichkeiten und eignet sich aufgrund seiner kompakten Bauform besonders für Überkopfarbeiten und Bohrungen an engen Stellen. Mit dem kraftvollen 650-Watt-Motor sorgt das Gerät für einen schnellen Bohrfortschritt und eine hohe Meißelleistung. Bei Letzterem übertrifft er dabei die anderen Bohrhämmer der Einstiegsklasse sogar um 30 Prozent. Die robuste Blockbauweise des Bosch GBH 2-20 D Professional sorgt zudem für eine lange Lebensdauer und macht ihn zu einem geeigneten Gerät für Elektro- sowie Sanitär- und Heizungsinstallateure oder Innenausbauer. ",
+		"productId": "061125A400",
+		"category": 0,
+		"price": 10
+	},
+	{
+		"id": 2,
+		"name":"Makita Akku-Schlagbohrschrauber " ,
+		"description": "Akku-Schlagbohrschrauber 18 V DHP453RYJ Schlagwerk abschaltbar Elektronikschalter für stufenlose Drehzahlsteuerung Rechts-/Links-Lauf Drehmoment in 16 Stufen plus Bohrstufe einstellbar kompatibel mit 1,5 Ah, 3,0 Ah und 4,0 Ah",
+		"productId": "DHP453RYJ",
+		"category": 0,
+		"price": 10
+	},
+	{
+		"id": 3,
+		"name":"Hilti TE 1000-AVR" ,
+		"description": "Der Hilti TE 1000-AVR ist ein kraftvoller Meisselhammer für Abbruch- und Renovierungsarbeiten. Dank einer aktiven Vibrationsreduktion und des von den Griffen entkoppelten Motors sind die Vibrationen sehr niedrig und erlauben auch lange Arbeitsphasen.",
+		"productId": "DHP938YJ",
+		"category": 0,
+		"price": 30
+	},
+	{
+		"id": 4,
+		"name":"Terex TC 125 Raupenbagger" ,
+		"description": "Leistungsstarker Kompaktbagger mit rund 12 Tonnen Einsatzgewicht. Diese ausgereifte Maschine bietet die Leistung eines großen Baggers auf kleinem Raum. Seine kompakte Bauweise überzeugt bei den Einsätzen wo ein größeres Gerät kein Platz mehr hat.",
+		"productId": "1ai237JASd",
+		"category": 1,
+		"price": 10
+	},
+	{
+	  "id": 4,
+	  "name":"GeForce 4 TC 125 Raupenbagger" ,
+	  "description": "Leistungsstarker Kompaktbagger mit rund 12 Tonnen Einsatzgewicht. Diese ausgereifte Maschine bietet die Leistung eines großen Baggers auf kleinem Raum. Seine kompakte Bauweise überzeugt bei den Einsätzen wo ein größeres Gerät kein Platz mehr hat.",
+	  "productId": "1ai237JASd",
+	  "category": 3,
+	  "price": 222
+	}
+	
+]

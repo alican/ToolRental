@@ -3,6 +3,7 @@ package eu.alican.toolrental;
 import android.content.Intent;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
+import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.TextView;
@@ -17,10 +18,13 @@ public class DetailActivity extends ActionBarActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_detail);
 
+        Toolbar toolbar = (Toolbar) findViewById(R.id.my_toolbar);
+        setSupportActionBar(toolbar);
+
         int productId = getIntent().getIntExtra("productId", -1);
         //String productId = getIntent().getStringExtra("productId");
 
-        TextView textView = (TextView) findViewById(R.id.hello);
+        TextView textView = (TextView) findViewById(R.id.productName);
         textView.setText(productId + "");
 
     }

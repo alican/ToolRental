@@ -5,8 +5,13 @@ import android.database.Cursor;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
+import android.view.animation.TranslateAnimation;
 import android.widget.CursorAdapter;
 import android.widget.TextView;
+
+import java.util.List;
 
 import eu.alican.toolrental.R;
 
@@ -15,8 +20,11 @@ import eu.alican.toolrental.R;
  */
 
 public class ProductAdapter extends CursorAdapter {
+
+
     public ProductAdapter(Context context, Cursor cursor) {
         super(context, cursor, 0);
+
     }
 
     // The newView method is used to inflate a new view and return it,
@@ -25,6 +33,8 @@ public class ProductAdapter extends CursorAdapter {
     public View newView(Context context, Cursor cursor, ViewGroup parent) {
         return LayoutInflater.from(context).inflate(R.layout.product_list_item, parent, false);
     }
+
+
 
     // The bindView method is used to bind all data to a given view
     // such as setting the text on a TextView.
