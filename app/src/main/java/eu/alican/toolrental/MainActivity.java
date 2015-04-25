@@ -42,8 +42,8 @@ public class MainActivity extends ActionBarActivity {
         categories.add("2");
         categories.add("3");
 
-        FetchJsonTask weatherTask = new FetchJsonTask(MainActivity.this);
-        weatherTask.execute();
+        //FetchJsonTask weatherTask = new FetchJsonTask(MainActivity.this);
+        //weatherTask.execute();
 
         MyDbHandler handler = new MyDbHandler(this, null, null, 1);
         SQLiteDatabase db = handler.getWritableDatabase();

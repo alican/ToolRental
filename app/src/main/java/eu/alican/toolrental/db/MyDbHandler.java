@@ -11,12 +11,16 @@ import android.provider.BaseColumns;
 import java.util.Iterator;
 import java.util.Vector;
 
+import eu.alican.toolrental.MainActivity;
 import eu.alican.toolrental.models.Product;
+import eu.alican.toolrental.utls.FetchJsonTask;
 
 /**
  * Created by alican on 22.04.2015.
  */
 public class MyDbHandler extends SQLiteOpenHelper  {
+
+    private Context mContext;
 
     public static abstract class ProductEntry implements BaseColumns{
         public static final String TABLE_NAME = "products";
@@ -46,11 +50,15 @@ public class MyDbHandler extends SQLiteOpenHelper  {
 
     public MyDbHandler(Context context, String name, SQLiteDatabase.CursorFactory factory, int version){
         super(context, DATABASE_NAME, factory, DATABASE_VERSION);
+        mContext = context;
+
     }
 
     @Override
     public void onCreate(SQLiteDatabase db) {
         db.execSQL(SQL_CREATE_ENTRIES);
+        FetchJsonTask weatherTask = new FetchJsonTask(mContext);
+        weatherTask.execute();
 
     }
 
