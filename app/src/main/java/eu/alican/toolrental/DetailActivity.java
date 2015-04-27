@@ -1,6 +1,7 @@
 package eu.alican.toolrental;
 
 import android.content.Intent;
+import android.database.Cursor;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
@@ -8,10 +9,14 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.TextView;
 
+import eu.alican.toolrental.adapter.ProductAdapter;
+import eu.alican.toolrental.db.MyDbHandler;
+import eu.alican.toolrental.models.Product;
+
 
 public class DetailActivity extends ActionBarActivity {
 
-
+    public MyDbHandler handler;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -22,10 +27,14 @@ public class DetailActivity extends ActionBarActivity {
         setSupportActionBar(toolbar);
 
         int productId = getIntent().getIntExtra("productId", -1);
-        //String productId = getIntent().getStringExtra("productId");
+
+        handler = new MyDbHandler(this, null, null, 1);
+        Product product = handler.getProduct(productId);
+
+
 
         TextView textView = (TextView) findViewById(R.id.productName);
-        textView.setText(productId + "");
+        textView.setText(product.getName());
 
     }
 

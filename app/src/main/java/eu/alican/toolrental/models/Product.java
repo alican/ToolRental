@@ -1,5 +1,7 @@
 package eu.alican.toolrental.models;
 
+import android.graphics.drawable.Drawable;
+
 /**
  * Created by alican on 20.04.2015.
  */
@@ -11,8 +13,27 @@ public class Product {
     private int productId;
     private String manufactorId;
     private int price;
+    private int category;
 
 
+    public Product() {}
+
+    public Product(int _id, String name, String description, int price, int category) {
+        super();
+        this._id = _id;
+        this.name = name;
+        this.description = description;
+        this.price = price;
+        this.category = category;
+    }
+
+    public int getCategory() {
+        return category;
+    }
+
+    public void setCategory(int category) {
+        this.category = category;
+    }
 
     public int getPrice() {
         return price;
@@ -60,5 +81,9 @@ public class Product {
 
     public void setManufactorId(String manufactorId) {
         this.manufactorId = manufactorId;
+    }
+
+    public String getImage(){
+        return "image" + _id;
     }
 }

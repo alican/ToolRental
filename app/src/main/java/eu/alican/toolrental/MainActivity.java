@@ -27,6 +27,8 @@ public class MainActivity extends ActionBarActivity {
     public Cursor productCursor;
     public  ProductAdapter productAdapter;
 
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -41,12 +43,6 @@ public class MainActivity extends ActionBarActivity {
         categories.add("1");
         categories.add("2");
         categories.add("3");
-
-        //FetchJsonTask weatherTask = new FetchJsonTask(MainActivity.this);
-        //weatherTask.execute();
-
-        MyDbHandler handler = new MyDbHandler(this, null, null, 1);
-        SQLiteDatabase db = handler.getWritableDatabase();
 
 
         Spinner categorySpinner = (Spinner) findViewById(R.id.category_spinner);
@@ -91,7 +87,7 @@ public class MainActivity extends ActionBarActivity {
         handler = new MyDbHandler(this, null, null, 1);
         productCursor = handler.getProducts(category);
 
-        productAdapter = new ProductAdapter(this, productCursor);
+        productAdapter = new ProductAdapter(this, productCursor, false);
         ListView lvItems = (ListView) findViewById(R.id.listView);
         lvItems.setAdapter(productAdapter);
 

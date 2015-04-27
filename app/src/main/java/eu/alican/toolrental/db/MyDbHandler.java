@@ -3,10 +3,12 @@ package eu.alican.toolrental.db;
 import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
+import android.database.DatabaseUtils;
 import android.database.SQLException;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 import android.provider.BaseColumns;
+import android.util.Log;
 
 import java.util.Iterator;
 import java.util.Vector;
@@ -28,10 +30,12 @@ public class MyDbHandler extends SQLiteOpenHelper  {
         public static final String COLUMN_DESC = "description";
         public static final String COLUMN_PRICE = "price";
         public static final String COLUMN_CATEGORY = "category";
+        public static final String COLUMN_IMAGE = "image";
+
 
     }
 
-    public static final int DATABASE_VERSION = 4;
+    public static final int DATABASE_VERSION = 6;
     public static final String DATABASE_NAME = "Toolrental.db";
 
     private static final String SQL_CREATE_ENTRIES =
@@ -40,7 +44,9 @@ public class MyDbHandler extends SQLiteOpenHelper  {
                     ProductEntry.COLUMN_NAME + " TEXT, "  +
                     ProductEntry.COLUMN_DESC + " TEXT, " +
                     ProductEntry.COLUMN_PRICE + " INTEGER, " +
-                    ProductEntry.COLUMN_CATEGORY + " INTEGER" +
+                    ProductEntry.COLUMN_CATEGORY + " INTEGER, " +
+                    ProductEntry.COLUMN_IMAGE + " TEXT" +
+
                     " )";
 
     private static final String SQL_DELETE_ENTRIES =
@@ -76,14 +82,14 @@ public class MyDbHandler extends SQLiteOpenHelper  {
 
 
 
-    public void insert(String name, String description, int price){
+    public void insert(String name, String description, int price, int category){
         SQLiteDatabase db = getWritableDatabase();
         try {
             ContentValues values = new ContentValues();
             values.put(ProductEntry.COLUMN_NAME, name);
             values.put(ProductEntry.COLUMN_DESC, description);
             values.put(ProductEntry.COLUMN_PRICE, price);
-            values.put(ProductEntry.COLUMN_PRICE, price);
+            values.put(ProductEntry.COLUMN_PRICE, category);
             long newRowId;
             newRowId = db.insert(ProductEntry.TABLE_NAME, null, values);
         } finally {
@@ -122,6 +128,27 @@ public class MyDbHandler extends SQLiteOpenHelper  {
         SQLiteDatabase db = this.getReadableDatabase();
         Cursor cursor = db.rawQuery(selectQuery, null);
         return cursor;
+    }
+    public Product getProduct(int productId){
+
+        String selectQuery = "SELECT  * FROM " + ProductEntry.TABLE_NAME +
+                    " WHERE " + ProductEntry._ID + "=" + productId;
+
+        SQLiteDatabase db = this.getReadableDatabase();
+        Cursor cursor = db.rawQuery(selectQuery, null);
+
+        if (cursor != null)
+            cursor.moveToFirst();
+
+        Product product = new Product(
+                cursor.getInt(cursor.getColumnIndex("_id")),
+                cursor.getString(cursor.getColumnIndex("name")),
+                cursor.getString(cursor.getColumnIndex("description")),
+                cursor.getInt(cursor.getColumnIndex("price")),
+                cursor.getInt(cursor.getColumnIndex("category"))
+        );
+        cursor.close();
+        return product;
     }
 
 

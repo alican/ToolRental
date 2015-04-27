@@ -45,6 +45,7 @@ public class FetchJsonTask extends AsyncTask<String, Void, String[]> {
         final String JSON_DESC = "description";
         final String JSON_PID = "productId";
         final String JSON_CATEGORY = "category";
+        final String JSON_ID = "id";
 
         try {
             JSONArray productArray = new JSONArray(productJsonStr);
@@ -57,12 +58,14 @@ public class FetchJsonTask extends AsyncTask<String, Void, String[]> {
                 String description = obj.getString(JSON_DESC);
                 String productId = obj.getString(JSON_PID);
                 int category = obj.getInt(JSON_CATEGORY);
+                String image = "image" + obj.getString(JSON_ID);
 
                 ContentValues productValues = new ContentValues();
                 productValues.put(MyDbHandler.ProductEntry.COLUMN_NAME, name);
                 productValues.put(MyDbHandler.ProductEntry.COLUMN_PRICE, price);
                 productValues.put(MyDbHandler.ProductEntry.COLUMN_DESC, description);
                 productValues.put(MyDbHandler.ProductEntry.COLUMN_CATEGORY, category);
+                productValues.put(MyDbHandler.ProductEntry.COLUMN_IMAGE, image);
                 // TODO rest implementieren
 
 
@@ -74,8 +77,6 @@ public class FetchJsonTask extends AsyncTask<String, Void, String[]> {
                 dbHandler.bulkInsert(cVVector);
 
             }
-
-
 
             Log.d(LOG_TAG, "FetchJsonTask Complete. " + cVVector.size() + " Inserted");
 
