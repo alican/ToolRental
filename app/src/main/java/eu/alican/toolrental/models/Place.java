@@ -3,11 +3,23 @@ package eu.alican.toolrental.models;
 /**
  * Baustelle
  */
-public class Location {
+public class Place {
     private int _id;
     private String name;
     private String address;
 
+    public Place(int id, String name, String address) {
+        super();
+        this.name = name;
+        this.address = address;
+        this._id = id;
+    }
+
+    public Place(String name, String address) {
+        super();
+        this.name = name;
+        this.address = address;
+    }
 
     public int getId() {
         return _id;

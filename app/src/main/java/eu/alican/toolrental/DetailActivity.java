@@ -2,12 +2,21 @@ package eu.alican.toolrental;
 
 import android.content.Intent;
 import android.database.Cursor;
+import android.graphics.drawable.Drawable;
+import android.media.Image;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
+import android.transition.Fade;
+import android.transition.Transition;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.TextView;
+
+import java.io.IOException;
 
 import eu.alican.toolrental.adapter.ProductAdapter;
 import eu.alican.toolrental.db.MyDbHandler;
@@ -23,6 +32,13 @@ public class DetailActivity extends ActionBarActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_detail);
 
+        Transition fade = new Fade();
+        fade.excludeTarget(android.R.id.statusBarBackground, true);
+        fade.excludeTarget(R.id.my_toolbar, true);
+        fade.excludeTarget(android.R.id.navigationBarBackground, true);
+        getWindow().setExitTransition(fade);
+        getWindow().setEnterTransition(fade);
+
         Toolbar toolbar = (Toolbar) findViewById(R.id.my_toolbar);
         setSupportActionBar(toolbar);
 
@@ -32,8 +48,25 @@ public class DetailActivity extends ActionBarActivity {
         Product product = handler.getProduct(productId);
 
 
+        Button mietenButton = (Button) findViewById(R.id.button);
+        mietenButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(DetailActivity.this, SelectPlaceActivity.class);
+                startActivity(intent);
+            }
+        });
 
         TextView textView = (TextView) findViewById(R.id.productName);
+        ImageView productImage = (ImageView) findViewById(R.id.product_image);
+
+        Drawable image = null;
+        try {
+            image = Drawable.createFromStream(getAssets().open(product.getImage()), null);
+            productImage.setImageDrawable(image);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
         textView.setText(product.getName());
 
     }
