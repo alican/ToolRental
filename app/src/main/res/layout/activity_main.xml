@@ -5,42 +5,32 @@
     android:paddingTop="@dimen/activity_vertical_margin"
     android:paddingBottom="@dimen/activity_vertical_margin" tools:context=".MainActivity"
     android:padding="0dp">
-    <include layout="@layout/toolbar_main"/>
-    <FrameLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:background="@color/accent_material_light"
-        android:layout_gravity="center"
-        android:padding="10dp"
-        android:layout_marginTop="66dp"
-        android:layout_alignParentTop="true"
-        android:layout_alignTop="@+id/my_toolbar"
-        android:layout_alignStart="@+id/recycler_view"
-        android:layout_alignLeft="@+id/recycler_view"
-        android:layout_marginLeft="10dp"
-        android:layout_marginRight="10dp"
-        android:id="@+id/frameLayout"
-        android:layout_marginBottom="10dp">
-
-        <Spinner
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:id="@+id/category_spinner"
-
-            android:background="@color/ripple_material_light"
-            android:gravity="center"
-            android:spinnerMode="dropdown" />
-    </FrameLayout>
 
 
     <android.support.v7.widget.RecyclerView
         android:id="@+id/recycler_view"
         android:scrollbars="vertical"
+        android:clipToPadding="false"
+        android:paddingTop="?attr/actionBarSize"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"
-        android:layout_below="@+id/frameLayout"
-        />
+        android:layout_alignParentTop="true" />
+    <android.support.v7.widget.Toolbar
+        android:id="@+id/my_toolbar"
+        android:layout_height="wrap_content"
+        android:layout_width="match_parent"
+        android:minHeight="?attr/actionBarSize"
+        android:background="?attr/colorPrimary"
+        >
+        <Spinner
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/category_spinner"
+            android:minWidth="100dp"
+
+            android:spinnerMode="dropdown" />
+    </android.support.v7.widget.Toolbar>
 
 </RelativeLayout>

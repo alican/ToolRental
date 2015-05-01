@@ -10,7 +10,24 @@ public class Rental {
     private int productId;
     private int locationId;
     private Date startDate;
+    private Date endDate;
 
+    public Rental(int id, int productId, int locationId, Date startDate, Date endDate) {
+        this._id = id;
+        this.productId = productId;
+        this.locationId = locationId;
+        this.startDate = startDate;
+        this.endDate = endDate;
+    }
+
+
+    public boolean isInRent(){
+        return true;
+    }
+
+    public float currentPrice(){
+        return 0.2F;
+    }
 
     public int getId() {
         return _id;

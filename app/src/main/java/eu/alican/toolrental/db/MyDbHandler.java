@@ -10,13 +10,18 @@ import android.database.sqlite.SQLiteOpenHelper;
 import android.provider.BaseColumns;
 import android.util.Log;
 
+import java.sql.Date;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Iterator;
+import java.util.Locale;
 import java.util.Vector;
 
 import eu.alican.toolrental.MainActivity;
 import eu.alican.toolrental.models.Place;
 import eu.alican.toolrental.models.Product;
+import eu.alican.toolrental.models.Rental;
 import eu.alican.toolrental.utls.FetchJsonTask;
 
 /**
@@ -25,7 +30,7 @@ import eu.alican.toolrental.utls.FetchJsonTask;
 public class MyDbHandler extends SQLiteOpenHelper  {
 
     private Context mContext;
-    public static final int DATABASE_VERSION = 7;
+    public static final int DATABASE_VERSION = 15;
     public static final String DATABASE_NAME = "Toolrental.db";
 
     public static abstract class ProductEntry implements BaseColumns{
@@ -34,6 +39,7 @@ public class MyDbHandler extends SQLiteOpenHelper  {
         public static final String COLUMN_DESC = "description";
         public static final String COLUMN_PRICE = "price";
         public static final String COLUMN_CATEGORY = "category";
+        public static final String COLUMN_PID = "productId";
         public static final String COLUMN_IMAGE = "image";
 
         private static final String SQL_CREATE_ENTRIES =
@@ -41,6 +47,7 @@ public class MyDbHandler extends SQLiteOpenHelper  {
                         _ID + " INTEGER PRIMARY KEY," +
                         COLUMN_NAME + " TEXT, "  +
                         COLUMN_DESC + " TEXT, " +
+                        COLUMN_PID + " TEXT, " +
                         COLUMN_PRICE + " INTEGER, " +
                         COLUMN_CATEGORY + " INTEGER, " +
                         COLUMN_IMAGE + " TEXT" +
@@ -54,17 +61,41 @@ public class MyDbHandler extends SQLiteOpenHelper  {
         public static final String TABLE_NAME = "places";
         public static final String COLUMN_NAME = "name";
         public static final String COLUMN_ADDRESS = "address";
+        public static final String COLUMN_CREATED_AT = "created_at";
 
         private static final String SQL_CREATE_ENTRIES =
                 "CREATE TABLE " + TABLE_NAME + " (" +
                         _ID + " INTEGER PRIMARY KEY," +
                         COLUMN_NAME + " TEXT, "  +
-                        COLUMN_ADDRESS + " TEXT" +
+                        COLUMN_ADDRESS + " TEXT, " +
+                        COLUMN_CREATED_AT +" datetime DEFAULT CURRENT_TIMESTAMP" +
                         " )";
 
         private static final String SQL_DELETE_ENTRIES =
                 "DROP TABLE IF EXISTS " + TABLE_NAME;
     }
+
+    public static abstract class RentalEntry implements BaseColumns{
+        public static final String TABLE_NAME = "rentals";
+        public static final String COLUMN_PID = "productId";
+        public static final String COLUMN_LID = "locationId";
+        public static final String COLUMN_START_DATE = "start_date";
+        public static final String COLUMN_END_DATE = "end_date";
+
+        private static final String SQL_CREATE_ENTRIES =
+                "CREATE TABLE " + TABLE_NAME + " (" +
+                        _ID + " INTEGER PRIMARY KEY," +
+                        COLUMN_PID + " INTEGER, "  +
+                        COLUMN_LID + " INTEGER, " +
+                        COLUMN_START_DATE +" datetime DEFAULT CURRENT_TIMESTAMP, " +
+                        COLUMN_END_DATE +" datetime " +
+                        " )";
+
+        private static final String SQL_DELETE_ENTRIES =
+                "DROP TABLE IF EXISTS " + TABLE_NAME;
+    }
+
+
 
 
     public MyDbHandler(Context context, String name, SQLiteDatabase.CursorFactory factory, int version){
@@ -77,6 +108,7 @@ public class MyDbHandler extends SQLiteOpenHelper  {
     public void onCreate(SQLiteDatabase db) {
         db.execSQL(ProductEntry.SQL_CREATE_ENTRIES);
         db.execSQL(PlaceEntry.SQL_CREATE_ENTRIES);
+        db.execSQL(RentalEntry.SQL_CREATE_ENTRIES);
         FetchJsonTask weatherTask = new FetchJsonTask(mContext);
         weatherTask.execute();
 
@@ -86,6 +118,7 @@ public class MyDbHandler extends SQLiteOpenHelper  {
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
         db.execSQL(ProductEntry.SQL_DELETE_ENTRIES);
         db.execSQL(PlaceEntry.SQL_DELETE_ENTRIES);
+        db.execSQL(RentalEntry.SQL_DELETE_ENTRIES);
         onCreate(db);
     }
 
@@ -94,6 +127,53 @@ public class MyDbHandler extends SQLiteOpenHelper  {
     }
 
 
+    public long newRental(int productId, int placeId){
+
+        try (SQLiteDatabase db = getWritableDatabase()) {
+            ContentValues values = new ContentValues();
+            values.put(RentalEntry.COLUMN_PID, productId);
+            values.put(RentalEntry.COLUMN_LID, placeId);
+
+            long newRowId = db.insert(RentalEntry.TABLE_NAME, null, values);
+            return newRowId;
+        }
+
+    }
+    public void stopRental(){
+
+    }
+
+    public Rental getRentalById(int id) throws ParseException {
+        String selectQuery = "SELECT  * FROM " + RentalEntry.TABLE_NAME +
+                " WHERE " + RentalEntry._ID + "=" + id;
+
+        SQLiteDatabase db = this.getReadableDatabase();
+        Cursor cursor = db.rawQuery(selectQuery, null);
+
+        if (cursor != null)
+            cursor.moveToFirst();
+
+//    public Rental(int id, int productId, int locationId, Date startDate, Date endDate) {
+
+        SimpleDateFormat sdf = new SimpleDateFormat("MM/dd/YYYY", Locale.getDefault());
+        assert cursor != null;
+        java.util.Date startDate = sdf.parse(cursor.getString(cursor.getColumnIndex(RentalEntry.COLUMN_START_DATE)));
+        java.util.Date endDate = sdf.parse(cursor.getString(cursor.getColumnIndex(RentalEntry.COLUMN_END_DATE)));
+
+        Rental rental = new Rental(
+                cursor.getInt(cursor.getColumnIndex("_id")),
+                cursor.getInt(cursor.getColumnIndex(RentalEntry.COLUMN_PID)),
+                cursor.getInt(cursor.getColumnIndex(RentalEntry.COLUMN_LID)),
+                startDate,
+                endDate
+        );
+        cursor.close();
+        db.close();
+        return rental;
+
+    }
+
+    public void getRentalsByPlace(){}
 
     public void insertPlace(String name, String address) {
         try (SQLiteDatabase db = getWritableDatabase()) {
@@ -115,6 +195,7 @@ public class MyDbHandler extends SQLiteOpenHelper  {
         if (cursor != null)
             cursor.moveToFirst();
 
+
         Place place = new Place(
                 cursor.getInt(cursor.getColumnIndex("_id")),
                 cursor.getString(cursor.getColumnIndex("name")),
@@ -125,7 +206,7 @@ public class MyDbHandler extends SQLiteOpenHelper  {
         return place;
     }
     public ArrayList<Place> getPlaces(){
-        String selectQuery = "SELECT  * FROM " + PlaceEntry.TABLE_NAME;
+        String selectQuery = "SELECT  * FROM " + PlaceEntry.TABLE_NAME + " ORDER BY created_at DESC";
 
         SQLiteDatabase db = this.getReadableDatabase();
         Cursor cursor = db.rawQuery(selectQuery, null);
@@ -135,7 +216,9 @@ public class MyDbHandler extends SQLiteOpenHelper  {
         int _id = cursor.getColumnIndex(PlaceEntry._ID);
         int name = cursor.getColumnIndex(PlaceEntry.COLUMN_NAME);
         int address = cursor.getColumnIndex(PlaceEntry.COLUMN_ADDRESS);
+
         while(cursor.moveToNext()) {
+
 
             Place place = new Place(
                     cursor.getInt(_id),
@@ -198,6 +281,7 @@ public class MyDbHandler extends SQLiteOpenHelper  {
 
         int _id = cursor.getColumnIndex(ProductEntry._ID);
         int name = cursor.getColumnIndex(ProductEntry.COLUMN_NAME);
+        int pid = cursor.getColumnIndex(ProductEntry.COLUMN_PID);
         int cat = cursor.getColumnIndex(ProductEntry.COLUMN_CATEGORY);
         int price = cursor.getColumnIndex(ProductEntry.COLUMN_PRICE);
         int desc = cursor.getColumnIndex(ProductEntry.COLUMN_PRICE);
@@ -208,6 +292,7 @@ public class MyDbHandler extends SQLiteOpenHelper  {
                     cursor.getString(name),
                     cursor.getString(desc),
                     cursor.getInt(price),
+                    cursor.getString(pid),
                     cursor.getInt(cat)
             );
             products.add(product); //add the item
@@ -232,6 +317,7 @@ public class MyDbHandler extends SQLiteOpenHelper  {
                 cursor.getString(cursor.getColumnIndex("name")),
                 cursor.getString(cursor.getColumnIndex("description")),
                 cursor.getInt(cursor.getColumnIndex("price")),
+                cursor.getString(cursor.getColumnIndex("productId")),
                 cursor.getInt(cursor.getColumnIndex("category"))
         );
         cursor.close();

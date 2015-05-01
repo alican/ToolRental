@@ -2,6 +2,8 @@ package eu.alican.toolrental.models;
 
 import android.graphics.drawable.Drawable;
 
+import eu.alican.toolrental.db.MyDbHandler;
+
 /**
  * Created by alican on 20.04.2015.
  */
@@ -10,7 +12,7 @@ public class Product {
     private int _id;
     private String name;
     private String description;
-    private int productId;
+    private String productId;
     private String manufactorId;
     private int price;
     private int category;
@@ -18,12 +20,13 @@ public class Product {
 
     public Product() {}
 
-    public Product(int _id, String name, String description, int price, int category) {
+    public Product(int _id, String name, String description, int price, String productId, int category) {
         super();
         this._id = _id;
         this.name = name;
         this.description = description;
         this.price = price;
+        this.productId = productId;
         this.category = category;
     }
 
@@ -67,11 +70,11 @@ public class Product {
         this.description = description;
     }
 
-    public int getProductId() {
+    public String getProductId() {
         return productId;
     }
 
-    public void setProductId(int productId) {
+    public void setProductId(String productId) {
         this.productId = productId;
     }
 
@@ -85,5 +88,12 @@ public class Product {
 
     public String getImage(){
         return "image" + _id + ".jpg";
+    }
+
+
+    public int rentMe(int placeId){
+        //MyDbHandler handler = new MyDbHandler();
+
+        return 0;
     }
 }

@@ -14,7 +14,11 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.ScrollView;
 import android.widget.TextView;
+
+import com.nirhart.parallaxscroll.views.ParallaxScrollView;
+import com.nirhart.parallaxscroll.views.ParallaxedView;
 
 import java.io.IOException;
 
@@ -42,6 +46,7 @@ public class DetailActivity extends ActionBarActivity {
         Toolbar toolbar = (Toolbar) findViewById(R.id.my_toolbar);
         setSupportActionBar(toolbar);
 
+
         int productId = getIntent().getIntExtra("productId", -1);
 
         handler = new MyDbHandler(this, null, null, 1);
@@ -57,8 +62,11 @@ public class DetailActivity extends ActionBarActivity {
             }
         });
 
-        TextView textView = (TextView) findViewById(R.id.productName);
+        TextView pname = (TextView) findViewById(R.id.productName);
+        TextView pid = (TextView) findViewById(R.id.productId);
+        TextView pdesc = (TextView) findViewById(R.id.productDescription);
         ImageView productImage = (ImageView) findViewById(R.id.product_image);
+
 
         Drawable image = null;
         try {
@@ -67,7 +75,10 @@ public class DetailActivity extends ActionBarActivity {
         } catch (IOException e) {
             e.printStackTrace();
         }
-        textView.setText(product.getName());
+        pname.setText(product.getName());
+        pdesc.setText(product.getDescription());
+
+        pid.setText("Nr.: " + product.getProductId());
 
     }
 

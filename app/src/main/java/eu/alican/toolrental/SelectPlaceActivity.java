@@ -1,11 +1,13 @@
 package eu.alican.toolrental;
 
 import android.content.Intent;
+import android.graphics.drawable.ColorDrawable;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ListView;
@@ -19,22 +21,27 @@ import eu.alican.toolrental.models.Place;
 
 
 public class SelectPlaceActivity extends ActionBarActivity {
+    ArrayList<Place> places;
+    ListView listView;
+    ArrayAdapter<Place> placesAdapter;
+    MyDbHandler dbHandler;
+    private int selectedItem = -1;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_select_place);
 
-        ListView listView = (ListView) findViewById(R.id.listView);
+        listView = (ListView) findViewById(R.id.listView);
+        listView.setChoiceMode(1);
 
-        MyDbHandler dbHandler = new MyDbHandler(this, null, null, 1);
+        listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
 
-        ArrayList<Place> places =dbHandler.getPlaces();
-
-        ArrayAdapter<Place> placesAdapter =
-                new ArrayAdapter<Place>(SelectPlaceActivity.this, android.R.layout.simple_list_item_1, places);
-
-        listView.setAdapter(placesAdapter);
+                //  listView.setItemChecked(position, true);
+            }
+        });
 
         Button newPlace = (Button) findViewById(R.id.newPlace);
         newPlace.setOnClickListener(new View.OnClickListener() {
@@ -47,6 +54,35 @@ public class SelectPlaceActivity extends ActionBarActivity {
             }
         });
 
+        Button okButton = (Button) findViewById(R.id.okButton);
+        okButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                int checkedPlace = listView.getCheckedItemPosition();
+                Place place = places.get(checkedPlace);
+                dbHandler.newRental(1,1);
+                finish();
+            }
+        });
+
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        dbHandler = new MyDbHandler(this, null, null, 1);
+
+        places = dbHandler.getPlaces();
+        placesAdapter = new ArrayAdapter<>(SelectPlaceActivity.this,
+                android.R.layout.simple_list_item_single_choice, places);
+        listView.setAdapter(placesAdapter);
+
+        listView.setItemChecked(0, true);
+
+    }
+
+    public void finish(View view) {
+        super.finish();
     }
 
     @Override

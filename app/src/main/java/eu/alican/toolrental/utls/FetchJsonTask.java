@@ -66,6 +66,7 @@ public class FetchJsonTask extends AsyncTask<String, Void, String[]> {
                 productValues.put(MyDbHandler.ProductEntry.COLUMN_DESC, description);
                 productValues.put(MyDbHandler.ProductEntry.COLUMN_CATEGORY, category);
                 productValues.put(MyDbHandler.ProductEntry.COLUMN_IMAGE, image);
+                productValues.put(MyDbHandler.ProductEntry.COLUMN_PID, productId);
                 // TODO rest implementieren
 
 

@@ -1,8 +1,13 @@
 package eu.alican.toolrental;
 
+import android.animation.Animator;
+import android.animation.AnimatorListenerAdapter;
+import android.annotation.TargetApi;
 import android.content.Intent;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
+import android.os.Build;
+import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
@@ -14,6 +19,7 @@ import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.animation.LinearInterpolator;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
@@ -28,6 +34,7 @@ import eu.alican.toolrental.adapter.ProductAdapter;
 import eu.alican.toolrental.adapter.RecyclerAdapter;
 import eu.alican.toolrental.db.MyDbHandler;
 import eu.alican.toolrental.models.Product;
+import eu.alican.toolrental.utls.AndroidUtils;
 import eu.alican.toolrental.utls.FetchJsonTask;
 import jp.wasabeef.recyclerview.animators.SlideInLeftAnimator;
 import jp.wasabeef.recyclerview.animators.adapters.AlphaInAnimationAdapter;
@@ -35,12 +42,19 @@ import jp.wasabeef.recyclerview.animators.adapters.SlideInBottomAnimationAdapter
 
 
 public class MainActivity extends ActionBarActivity {
+    private String[] mTitles;
+    private DrawerLayout mDrawerLayout;
+    private ListView mDrawerList;
+
+
     public MyDbHandler handler;
     public ArrayList<Product> products;
 
     private RecyclerView mRecyclerView;
     private RecyclerView.Adapter mAdapter;
     private RecyclerView.LayoutManager mLayoutManager;
+    private static final float TOOLBAR_ELEVATION = 14f;
+    Toolbar toolbar;
 
 
     @Override
@@ -55,11 +69,68 @@ public class MainActivity extends ActionBarActivity {
         getWindow().setExitTransition(fade);
         getWindow().setEnterTransition(fade);
 
-        Toolbar toolbar = (Toolbar) findViewById(R.id.my_toolbar);
+        toolbar = (Toolbar) findViewById(R.id.my_toolbar);
         setSupportActionBar(toolbar);
+        getSupportActionBar().setDisplayShowTitleEnabled(false);
+
         mRecyclerView = (RecyclerView) findViewById(R.id.recycler_view);
         //mRecyclerView.setHasFixedSize(true);
         mRecyclerView.setItemAnimator(new SlideInLeftAnimator());
+
+        mRecyclerView.addOnScrollListener(new RecyclerView.OnScrollListener() {
+            int verticalOffset;
+            boolean scrollingUp;
+
+            @Override
+            public void onScrollStateChanged(RecyclerView recyclerView, int newState) {
+                if (newState == RecyclerView.SCROLL_STATE_IDLE) {
+                    if (scrollingUp) {
+                        if (verticalOffset > toolbar.getHeight()) {
+                            toolbarAnimateHide();
+                        } else {
+                            toolbarAnimateShow(verticalOffset);
+                        }
+                    } else {
+                        if (toolbar.getTranslationY() < toolbar.getHeight() * -0.6 && verticalOffset > toolbar.getHeight()) {
+                            toolbarAnimateHide();
+                        } else {
+                            toolbarAnimateShow(verticalOffset);
+                        }
+                    }
+                }
+            }
+
+            @Override
+            public final void onScrolled(RecyclerView recyclerView, int dx, int dy) {
+                verticalOffset += dy;
+                scrollingUp = dy > 0;
+                int toolbarYOffset = (int) (dy - toolbar.getTranslationY());
+                toolbar.animate().cancel();
+                if (scrollingUp) {
+                    if (toolbarYOffset < toolbar.getHeight()) {
+                        if (verticalOffset > toolbar.getHeight()) {
+                            toolbarSetElevation(TOOLBAR_ELEVATION);
+                        }
+                        toolbar.setTranslationY(-toolbarYOffset);
+                    } else {
+                        toolbarSetElevation(0);
+                        toolbar.setTranslationY(-toolbar.getHeight());
+                    }
+                } else {
+                    if (toolbarYOffset < 0) {
+                        if (verticalOffset <= 0) {
+                            toolbarSetElevation(0);
+                        }
+                        toolbar.setTranslationY(0);
+                    } else {
+                        if (verticalOffset > toolbar.getHeight()) {
+                            toolbarSetElevation(TOOLBAR_ELEVATION);
+                        }
+                        toolbar.setTranslationY(-toolbarYOffset);
+                    }
+                }
+            }
+        });
 
         ImageLoaderConfiguration config = new ImageLoaderConfiguration.Builder(this).build();
         ImageLoader.getInstance().init(config);
@@ -128,16 +199,39 @@ public class MainActivity extends ActionBarActivity {
 
 
     }
-//    public void fetchProductsFromDb(int category){
-//        handler = new MyDbHandler(this, null, null, 1);
-//        productCursor = handler.getProducts(category);
-//
-//        productAdapter = new ProductAdapter(this, productCursor, false);
-//        ListView lvItems = (ListView) findViewById(R.id.listView);
-//        lvItems.setAdapter(productAdapter);
-//
-//    }
+    @TargetApi(Build.VERSION_CODES.LOLLIPOP)
+    private void toolbarSetElevation(float elevation) {
+        // setElevation() only works on Lollipop
+        if (AndroidUtils.isLollipop()) {
+            toolbar.setElevation(elevation);
+        }
+    }
 
+    private void toolbarAnimateShow(final int verticalOffset) {
+        toolbar.animate()
+                .translationY(0)
+                .setInterpolator(new LinearInterpolator())
+                .setDuration(180)
+                .setListener(new AnimatorListenerAdapter() {
+                    @Override
+                    public void onAnimationStart(Animator animation) {
+                        toolbarSetElevation(verticalOffset == 0 ? 0 : TOOLBAR_ELEVATION);
+                    }
+                });
+    }
+
+    private void toolbarAnimateHide() {
+        toolbar.animate()
+                .translationY(-toolbar.getHeight())
+                .setInterpolator(new LinearInterpolator())
+                .setDuration(180)
+                .setListener(new AnimatorListenerAdapter() {
+                    @Override
+                    public void onAnimationEnd(Animator animation) {
+                        toolbarSetElevation(0);
+                    }
+                });
+    }
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {

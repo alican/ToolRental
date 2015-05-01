@@ -1,5 +1,7 @@
 package eu.alican.toolrental.models;
 
+import java.util.Date;
+
 /**
  * Baustelle
  */
@@ -13,12 +15,20 @@ public class Place {
         this.name = name;
         this.address = address;
         this._id = id;
+
     }
 
     public Place(String name, String address) {
         super();
         this.name = name;
         this.address = address;
+    }
+
+
+
+    @Override
+    public String toString() {
+        return name + "\n" + address;
     }
 
     public int getId() {

@@ -37,6 +37,10 @@
             android:name=".AddPlaceActivity"
             android:label="@string/title_activity_add_place" >
         </activity>
+        <activity
+            android:name=".NavigationDrawerActivity"
+            android:label="@string/title_activity_navigation_drawer" >
+        </activity>
     </application>
 
 </manifest>

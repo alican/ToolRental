@@ -82,6 +82,7 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.ViewHo
 
                 ActivityOptionsCompat options = ActivityOptionsCompat.makeSceneTransitionAnimation((Activity) context, image, "productImage");
 
+
                 context.startActivity(intent, options.toBundle());
             }
         });
@@ -93,6 +94,8 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.ViewHo
         String imageUri = "assets://" + mDataset.get(position).getImage();//local or remote image uri address
 
         ImageLoader.getInstance().displayImage(imageUri, holder.mProductImage);
+        //holder.mProductImage.setVisibility(View.VISIBLE);
+
 
         // - get element from your dataset at this position
         // - replace the contents of the view with that element
@@ -100,6 +103,11 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.ViewHo
 
     }
 
+    @Override
+    public void onViewRecycled(ViewHolder holder) {
+        super.onViewRecycled(holder);
+       // holder.mProductImage.setVisibility(View.GONE);
+    }
 
     @Override
     public int getItemCount() {
