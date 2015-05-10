@@ -16,4 +16,7 @@
     <string name="navigation_drawer_close">Close navigation drawer</string>
 
     <string name="action_example">Example action</string>
+    <string name="title_activity_rentals">RentalsActivity</string>
+    <string name="title_activity_rentals_list">RentalsListActivity</string>
+    <string name="title_activity_place_list">PlaceListActivity</string>
 </resources>

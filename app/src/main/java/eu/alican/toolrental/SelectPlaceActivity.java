@@ -29,6 +29,10 @@ public class SelectPlaceActivity extends ActionBarActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+
+
+        final int productId = getIntent().getIntExtra("productId", -1);
+
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_select_place);
 
@@ -60,7 +64,7 @@ public class SelectPlaceActivity extends ActionBarActivity {
             public void onClick(View v) {
                 int checkedPlace = listView.getCheckedItemPosition();
                 Place place = places.get(checkedPlace);
-                dbHandler.newRental(1,1);
+                dbHandler.newRental(productId, place.getId());
                 finish();
             }
         });

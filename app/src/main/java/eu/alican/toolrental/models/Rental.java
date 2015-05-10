@@ -2,6 +2,9 @@ package eu.alican.toolrental.models;
 
 import java.util.Date;
 
+import eu.alican.toolrental.db.MyDbHandler;
+import eu.alican.toolrental.utls.ApplicationContextProvider;
+
 /**
  * Created by alican on 20.04.2015.
  */
@@ -11,6 +14,8 @@ public class Rental {
     private int locationId;
     private Date startDate;
     private Date endDate;
+    private Product product;
+
 
     public Rental(int id, int productId, int locationId, Date startDate, Date endDate) {
         this._id = id;
@@ -18,15 +23,40 @@ public class Rental {
         this.locationId = locationId;
         this.startDate = startDate;
         this.endDate = endDate;
+        this.product = getProduct();
     }
 
+    @Override
+    public String toString() {
+   //     return product.getName();
+        return currentPrice() + "";
+    }
 
+    public Product getProduct(){
+        MyDbHandler handler = new MyDbHandler(ApplicationContextProvider.getContext(), null, null, 1);
+        return handler.getProduct(this.productId);
+    }
     public boolean isInRent(){
         return true;
     }
 
     public float currentPrice(){
-        return 0.2F;
+        int price = product.getPrice();
+        return price * getDayCount();
+    }
+
+    public float getDayCount(){
+        Date now = new Date();
+        int timeDiff = (int)((now.getTime() - startDate.getTime()) / (1000*60*60*24l));
+        if (timeDiff == 0){
+            return 1.0f;
+        }
+        return timeDiff;
+    }
+
+    public void bringBack(){
+        MyDbHandler handler = new MyDbHandler(ApplicationContextProvider.getContext(), null, null, 1);
+        handler.bringBackRental(this._id);
     }
 
     public int getId() {

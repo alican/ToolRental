@@ -47,7 +47,7 @@ public class DetailActivity extends ActionBarActivity {
         setSupportActionBar(toolbar);
 
 
-        int productId = getIntent().getIntExtra("productId", -1);
+        final int productId = getIntent().getIntExtra("productId", -1);
 
         handler = new MyDbHandler(this, null, null, 1);
         Product product = handler.getProduct(productId);
@@ -58,6 +58,7 @@ public class DetailActivity extends ActionBarActivity {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(DetailActivity.this, SelectPlaceActivity.class);
+                intent.putExtra("productId", productId);
                 startActivity(intent);
             }
         });
@@ -66,7 +67,6 @@ public class DetailActivity extends ActionBarActivity {
         TextView pid = (TextView) findViewById(R.id.productId);
         TextView pdesc = (TextView) findViewById(R.id.productDescription);
         ImageView productImage = (ImageView) findViewById(R.id.product_image);
-
 
         Drawable image = null;
         try {

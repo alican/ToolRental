@@ -28,17 +28,12 @@ public class FetchJsonTask extends AsyncTask<String, Void, String[]> {
     private final String LOG_TAG = FetchJsonTask.class.getSimpleName();
     private final Context mContext;
 
-
-
     public FetchJsonTask(Context context) {
         mContext = context;
-
-
     }
 
     private void getProductDataFromJson(String productJsonStr) throws JSONException {
         Log.d(LOG_TAG, "FetchJsonTask triggered");
-
 
         final String JSON_NAME = "name";
         final String JSON_PRICE = "price";

@@ -82,6 +82,12 @@ public class MyDbHandler extends SQLiteOpenHelper  {
         public static final String COLUMN_START_DATE = "start_date";
         public static final String COLUMN_END_DATE = "end_date";
 
+        public static final int FILTER_ALL = 0;
+        public static final int FILTER_RETURNED = 1;
+        public static final int FILTER_STILL_BORROWED = 2;
+
+
+
         private static final String SQL_CREATE_ENTRIES =
                 "CREATE TABLE " + TABLE_NAME + " (" +
                         _ID + " INTEGER PRIMARY KEY," +
@@ -139,7 +145,14 @@ public class MyDbHandler extends SQLiteOpenHelper  {
         }
 
     }
-    public void stopRental(){
+    public void bringBackRental(int rentalId){
+        String updateQuery = "UPDATE "+ RentalEntry.TABLE_NAME +
+                " SET "+ RentalEntry.COLUMN_END_DATE +
+                " = date('now') WHERE "+ RentalEntry._ID +" = "+
+                rentalId;
+        SQLiteDatabase db = this.getReadableDatabase();
+        db.execSQL(updateQuery);
+
 
     }
 
@@ -173,7 +186,79 @@ public class MyDbHandler extends SQLiteOpenHelper  {
 
     }
 
-    public void getRentalsByPlace(){}
+    public ArrayList<Rental> getRentalsByPlace(int id, int filter) {
+        String filterString = "";
+
+        switch (filter){
+            case RentalEntry.FILTER_ALL:
+                filterString = " ";
+                break;
+            case RentalEntry.FILTER_RETURNED:
+                filterString = " WHERE "+ RentalEntry.COLUMN_END_DATE +" IS NOT NULL";
+                break;
+            case RentalEntry.FILTER_STILL_BORROWED:
+                filterString = " WHERE "+ RentalEntry.COLUMN_END_DATE +" IS NULL";
+        }
+
+        String selectQuery = "SELECT  * FROM " + RentalEntry.TABLE_NAME +
+                filterString +
+                " ORDER BY "+ RentalEntry.COLUMN_START_DATE +" DESC" ;
+
+
+        SQLiteDatabase db = this.getReadableDatabase();
+        Cursor cursor = db.rawQuery(selectQuery, null);
+        ArrayList<Rental> rentals = new ArrayList<>();
+
+        if (cursor != null)
+            cursor.moveToFirst();
+
+        //2015-05-08 12:54:06
+
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+        //SimpleDateFormat sdf = new SimpleDateFormat("EEE MMM dd HH:mm:ss Z yyyy", Locale.getDefault());
+
+
+        int _idIndex = cursor.getColumnIndex(RentalEntry._ID);
+        int productIndex = cursor.getColumnIndex(RentalEntry.COLUMN_PID);
+        int locationIndex = cursor.getColumnIndex(RentalEntry.COLUMN_LID);
+        int startDateIndex = cursor.getColumnIndex(RentalEntry.COLUMN_START_DATE);
+        int endDateIndex = cursor.getColumnIndex(RentalEntry.COLUMN_END_DATE);
+
+        while(cursor.moveToNext()) {
+           // Log.e("asdsadsa", DatabaseUtils.dumpCursorToString(cursor) );
+
+            assert cursor != null;
+            java.util.Date startDate = null;
+            java.util.Date endDate = null;
+            String startDateString =  cursor.getString(startDateIndex);
+            String endDateString =  cursor.getString(endDateIndex);
+            try {
+                startDate = sdf.parse(startDateString);
+                if (endDateString != null){
+                    endDate = sdf.parse(endDateString);
+                }
+
+            } catch (ParseException e) {
+                e.printStackTrace();
+            }
+
+
+// Rental(int id, int productId, int locationId, Date startDate, Date endDate) {
+
+            Rental rental = new Rental(
+                    cursor.getInt(_idIndex),
+                    cursor.getInt(productIndex),
+                    cursor.getInt(locationIndex),
+                    startDate,
+                    endDate
+            );
+            rentals.add(rental); //add the item
+        }
+        db.close();
+
+        return rentals;
+
+    }
 
     public void insertPlace(String name, String address) {
         try (SQLiteDatabase db = getWritableDatabase()) {

@@ -8,5 +8,5 @@
     android:minHeight="?attr/actionBarSize"
     android:background="?attr/colorPrimary"
     app:theme="@style/Widget.MyApp.Toolbar"
-
+    android:transitionName="tool_bar"
     />

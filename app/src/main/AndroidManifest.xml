@@ -3,6 +3,7 @@
     package="eu.alican.toolrental" >
 
     <application
+        android:name=".utls.ApplicationContextProvider"
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
@@ -38,8 +39,16 @@
             android:label="@string/title_activity_add_place" >
         </activity>
         <activity
-            android:name=".NavigationDrawerActivity"
-            android:label="@string/title_activity_navigation_drawer" >
+            android:name=".RentalsActivity"
+            android:label="@string/title_activity_rentals" >
+        </activity>
+        <activity
+            android:name=".RentalsListActivity"
+            android:label="@string/title_activity_rentals_list" >
+        </activity>
+        <activity
+            android:name=".PlaceListActivity"
+            android:label="@string/title_activity_place_list" >
         </activity>
     </application>
 

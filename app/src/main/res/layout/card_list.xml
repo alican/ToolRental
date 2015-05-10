@@ -15,10 +15,11 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     card_view:cardCornerRadius="4dp"
+    card_view:cardPreventCornerOverlap="true"
     android:foreground="?android:attr/selectableItemBackground"
 
     android:layout_margin="@dimen/activity_horizontal_margin">
-    <LinearLayout
+    <RelativeLayout
         android:layout_width="fill_parent"
         android:orientation="vertical"
         android:layout_height="wrap_content">
@@ -35,16 +36,31 @@
         android:layout_height="wrap_content"
         android:orientation="vertical"
         android:padding="8dp"
-        >
+        android:layout_below="@+id/pimg"
+        android:id="@+id/linearLayout">
         <TextView
             android:id="@+id/info_text"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
 
             android:text="Product Text"
-            />
+            android:textIsSelectable="false"
+            android:textSize="24sp" />
         </LinearLayout>
-    </LinearLayout>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAppearance="?android:attr/textAppearanceMedium"
+            android:text="10,- €"
+            android:id="@+id/priceTag"
+            android:background="#83343434"
+            android:padding="10dp"
+            android:layout_marginTop="28dp"
+            android:textColor="@color/primary_light"
+            android:layout_alignParentTop="true"
+            android:layout_alignParentStart="true" />
+    </RelativeLayout>
 
 
 
