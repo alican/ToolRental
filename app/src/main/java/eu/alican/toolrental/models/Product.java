@@ -87,7 +87,7 @@ public class Product {
     }
 
     public String getImage(){
-        return "image" + _id + ".jpg";
+        return "image" + (_id-1) + ".jpg";
     }
 
 

@@ -2,26 +2,26 @@
 
 	{
 		"id": 0,
-		"name":"Makita HR2811FT Kombihammer" ,
+		"name":"Makita HR2s811FT Kombihammer" ,
 		"description": "Zum Bohren, Hammerbohren und Meißeln Mit zusätzlicher Vibrationsdämpfung durch Feder gelagerten Handgriff Rutschkupplung Elektronisch regelbare Dreh- und Schlagzahl Handgriff mit eingelegtem Gummipolster für sicheren Halt und bequemes Arbeiten Mit leuchtstarker LED Mitgeliefertes Zubehör: Transportkoffer Tiefenanschlag Stabseitengriff ",
 		"productId": "HR2811FT-240V",
-		"category": 0,
+		"category": 3,
 		"price": 15
 	},
 	{
 		"id": 1,
-		"name":"Bosch Professional GBH 2-20 D Bohrhammer" ,
-		"description": " Der GBH 2-20 D Professional ist der kleinste und handlichste SDS-plus-Boschhammer – und dennoch ein Hochleistungswerkzeug. Er misst nur 32,5 cm und wiegt 2,3 Kilogramm. Durch die zusätzliche Meißelfunktion bietet er vielseitige Anwendungsmöglichkeiten und eignet sich aufgrund seiner kompakten Bauform besonders für Überkopfarbeiten und Bohrungen an engen Stellen. Mit dem kraftvollen 650-Watt-Motor sorgt das Gerät für einen schnellen Bohrfortschritt und eine hohe Meißelleistung. Bei Letzterem übertrifft er dabei die anderen Bohrhämmer der Einstiegsklasse sogar um 30 Prozent. Die robuste Blockbauweise des Bosch GBH 2-20 D Professional sorgt zudem für eine lange Lebensdauer und macht ihn zu einem geeigneten Gerät für Elektro- sowie Sanitär- und Heizungsinstallateure oder Innenausbauer. ",
+		"name":"Norton NBM 201 Kernbohrer" ,
+		"description": "Der Norton NBM201 Bohrmotor eignet sich ideal zum Nass- und Trockenbohren von allgemeinen Baumaterialien wie Beton, Mauerwerk, Poroton, Hohlblocksteinen und Ziegeln. Das Handkernbohrgerät lässt sich auch auf Kernbohrständern einsetzen und kann ohne weiteres Zubehör montiert werden.  Der Maschinen- und Bohrkronenverschleiß wird durch einen elektronischen Sanftanlauf verringert und erhöht zusammen mit einem Überlastungsschutzschalter die Lebensdauer der elektronischen und mechanischen Teile.",
 		"productId": "061125A400",
-		"category": 0,
-		"price": 10
+		"category": 3,
+		"price": 15
 	},
 	{
 		"id": 2,
-		"name":"Makita Akku-Schlagbohrschrauber " ,
-		"description": "Akku-Schlagbohrschrauber 18 V DHP453RYJ Schlagwerk abschaltbar Elektronikschalter für stufenlose Drehzahlsteuerung Rechts-/Links-Lauf Drehmoment in 16 Stufen plus Bohrstufe einstellbar kompatibel mit 1,5 Ah, 3,0 Ah und 4,0 Ah",
-		"productId": "DHP453RYJ",
-		"category": 0,
+		"name":"Stihl BT 121 Erdbohrgerät" ,
+		"description": "Der Erdbohrer BT 121 von Stihl ist ein Ein-Mann-Erdbohrgerät, das mit hoher Leistung und leichter Handhabung überzeugt.	  Es ist mit einem QuickStop-Bremssystems ausgestattet, das den Bohrer sofort zum Stillstand bringt, sollte sich der Bohrer verhaken und der Bediener dadurch den Auslösehebel mit dem Oberschenkel betätigen. Zudem ist der Griffrahmen des BT121 vibrationsgedämpft.",
+	    "productId": "DHP453RYJ",
+		"category": 3,
 		"price": 10
 	},
 	{
@@ -29,7 +29,7 @@
 		"name":"Hilti TE 1000-AVR" ,
 		"description": "Der Hilti TE 1000-AVR ist ein kraftvoller Meisselhammer für Abbruch- und Renovierungsarbeiten. Dank einer aktiven Vibrationsreduktion und des von den Griffen entkoppelten Motors sind die Vibrationen sehr niedrig und erlauben auch lange Arbeitsphasen.",
 		"productId": "DHP938YJ",
-		"category": 0,
+		"category": 3,
 		"price": 30
 	},
 	{
@@ -37,16 +37,160 @@
 		"name":"Terex TC 125 Raupenbagger" ,
 		"description": "Leistungsstarker Kompaktbagger mit rund 12 Tonnen Einsatzgewicht. Diese ausgereifte Maschine bietet die Leistung eines großen Baggers auf kleinem Raum. Seine kompakte Bauweise überzeugt bei den Einsätzen wo ein größeres Gerät kein Platz mehr hat.",
 		"productId": "1ai237JASd",
-		"category": 1,
+		"category": 0,
 		"price": 10
 	},
 	{
 	  "id": 5,
-	  "name":"GeForce 4 TC 125 Raupenbagger" ,
-	  "description": "Leistungsstarker Kompaktbagger mit rund 12 Tonnen Einsatzgewicht. Diese ausgereifte Maschine bietet die Leistung eines großen Baggers auf kleinem Raum. Seine kompakte Bauweise überzeugt bei den Einsätzen wo ein größeres Gerät kein Platz mehr hat.",
-	  "productId": "1ai237JASd",
-	  "category": 3,
-	  "price": 222
-	}
-	
+	  "name":"New Holland-Kobelco E 265 LC Raupenbagger" ,
+	  "description": "Der New Holland Raupenbagger E 265 LC ist ein Leistungsbagger moderner Bauweise. Das elegante und moderne Design ist ebenso ansprechend wie zweckmäßig. Die dadurch möglichen Wartungsklappen ermöglichen eine einfache und schnelle Wartung. Raupenbagger dieser Gewichtsklasse werden bevorzugt für Aushubarbeiten, Straßenbau und Abbrucharbeiten eingesetzt. Aber auch Kanalbauarbeiten sind mit dem verfügbaren hydraulischen Verstellausleger leicht durchführbar.",
+	  "productId": "12838inf9w3",
+	  "category": 0,
+	  "price": 200
+	},
+	{
+	  "id": 6,
+	  "name":"New Holland-Kobelco E 265 LC Long-Reach-Bagger" ,
+	  "description": "Dieser Longreachbagger kann insbesondere für Arbeiten an Gewässern eingesetzt werden. Aber auch der Böschungsbau ist sein Einsatzbereich. Durch die vergleichsweise große Reichweite muss der Raupenbagger weniger umgesetzt werden. Long Reach / Böschungsbagger werden bevorzugt für den Gewässerbau eingesetzt. Überall dort wo große Reichweiten gefragt sind ist dieser Raupenbagger der richtige Bagger.",
+	  "productId": "DJG239R",
+	  "category": 0,
+	  "price": 220
+	},
+	{
+	  "id": 7,
+	  "name":"Yanmar SV 08 Minibagger" ,
+	  "description": "Ganz leicht, ganz schmal. Das geringe Gesamtgewicht (ca. 1 Tonne) ermöglicht einen einfachen Transport des Baggers auf die Baustelle - z.B. mit einem PKW Anhänger. Durch das höhenverstellbare Fahrwerk des Yanmar SV08RV können Höhenunterschiede auf der Baustelle ausgeglichen werden. Durch die kleine Größe des Yanmar SV 08 kann selbst in engsten Räumen einfach und effektiv gearbeitet werden. Kompakte Bauweise und ein mechanisch verstellbares Fahrwerk eröffnen weitreichende Einsatzmöglichkeiten des Minibaggers Yanmar SV08RV. So kann der Minibagger beispielsweise eine Standard-Tür (700 mm Breite) einfach durchfahren. Gummiketten: Machen den Einsatz des Minibaggers auch auf empfindlichen Flächen, z. B. Waschbetonplatten, Asphalt, Fliesenbelägen oder Estrichen möglich und hinterlassen so gut wie keine Spuren.",
+	  "productId": "SKFO8402",
+	  "category": 0,
+	  "price": 100
+	},
+	{
+	  "id": 8,
+	  "name":"Neuson 2001 Dumper" ,
+	  "description": "Leistungsstarker Neuson Dumper mit bis zu 1210 Litern Muldeninhalt (gehäuft) und robustem Stahlbau. Der Neuson Dumper 2001 ist ein belastbarer Helfer in vielfältigen Einsätzen, zum Beispiel im Erd- und Straßenbau. Wartungsfreier hydrostatischer Allradantrieb macht den Einsatz auch bei voller Ladung von bis zu 2 Tonnen Nutzlast auf jedem Gelände bei bester Traktion möglich. Der Neuson Dumper 2001 ist ein großvolumiger Allraddumper für vielfältige Einsätze. Ob im kommunalen Bereich, im GaLaBau oder für Industrieanwendungen, der Neuson Dumper 2001 ist immer die richtige Wahl für ihren Mieteinsatz.",
+	  "productId": "KASDO2348",
+	  "category": 0,
+	  "price": 80
+	},
+	{
+	  "id": 9,
+	  "name":"Komatsu WA 200 PZ-6 Radlader" ,
+	  "description": "Der Komatsu Radlader WA 200 PZ-6 überzeugt bei jedem Einsatz durch seinen neuen ecot3 Motor und dem hydrostatischen Antrieb. Somit verfügt der Radlader über außergewöhnlich hohe Zugkraft bei gleichzeitig vergleichsweise niedrigem Kraftstoffverbrauch. Ob in der Abfallindustrie, im Holzumschlag, in der Landwirtschaft oder im Erdbau. Der Komatsu Radlader WA 200 PZ-6 kann immer optimal auf den jeweiligen Einsatzfall angepasst werden.",
+	  "productId": "KSO203",
+	  "category": 0,
+	  "price": 230
+	},
+	{
+	  "id": 10,
+	  "name":"Merlo P38.13 Teleskopmaschine" ,
+	  "description": "Der Teleskopstapler P 38.13 von Merlo ist durch seine perfekte Kombination aus Leistung, Fahrerkomfort und Verlässlichkeit für jede Art von Einsatz geeignet. Dank seines leistungsstarken Motors und des fortschrittlichen hydrostatischen Antriebs verfügt er über hohe Zugkraft bei gleichzeitig niedrigem Kraftstoffverbrauch. Außerdem überzeugt er durch ein vielfältiges Ausrüstungsprogramm jeden Anwender.",
+	  "productId": "KASD9234",
+	  "category": 0,
+	  "price": 150
+	},
+	{
+	  "id": 11,
+	  "name":"Bomag BW 120 AC Kombiwalze" ,
+	  "description": "Die Bomag BW 120 AC ist eine Kombiwalze der Extraklasse. Ihre bis ins Detail durchdachte Konstruktion macht sie zur unersetzbaren Kombiwalze auf fast jeder Baustelle. Sei es beispielsweise der moderne Kubota Motor, der moderne hydraulische Antriebsstrang, ergonomische Bedienelemente oder das umfangreiche Zubehörangebot. Mieten Sie die Bomag Kombiwalze BW 120 AC bei HKL BAUMASCHINEN und nutzen Sie diesen Asphaltexperten auf Ihrer Baustelle. Die Walze verbindet hohe Verdichtungsleistung mit hoher Asphaltoberflächenqualität. Insbesondere bei Steillagen ist diese Kombiwalze die passende Lösung. Mit der Kombiwalze Bomag BW 120 AC mieten Sie bei HKL BAUMASCHINEN das richtige Gerät für jede Verdichtungsaufgabe",
+	  "productId": "WOAS99pA",
+	  "category": 0,
+	  "price": 60
+	},
+	{
+	  "id": 12,
+	  "name":"Vermeer SC 252 Baumstumpffräse" ,
+	  "description": "Die Vermeer SC 252 ist eine leistungsstarke und für den Bediener leicht zu handhabende Baumstumpffräse. Um die Sicherheit des Anwenders zu gewährleisten ist sie mit einem Fräsradschutz un einem Bedienersicherheitssystem, das das Schneiden automatisch unterbricht, sobald der Steuerhebel für 0,5 Sekunden nicht berührt wird, ausgestattet. Dank ihrer enorm geringen Breite passt die SC 252 durch übliche Gartentore und ist selbst auf engstem Raum einfach zu manövrieren.",
+	  "productId": "OSP23AKKSD",
+	  "category": 1,
+	  "price": 90
+	},
+  {
+	"id": 13,
+	"name":"Atlas Copco XAS 67 Kompressor" ,
+	"description": "Kompakter und leistungsstarker Baukompressor. Leicht, einfach zu bedienen und wartungsarm überzeugt dieser Baukompressor auf jeder Baustelle. 	HKL BAUMASCHINEN setzt auf Kompressoren von Atlas Copco und vermietet ein umfangreiches Baukompressor - Programm an über 140 Mietstationen in Deutschland. Bewährte Technik von Atlas Copco für den Mietpark von HKL BAUMASCHINEN. Pneumatische Werkzeuge, Pumpen oder Sandstrahlanlagen werden durch diesen Baukompressor zuverlässig und kostengünstig mit Druckluft versorgt. Auch mehrere Werkzeuge werden ausdauernd mit Druckluft versorgt - so sorgt der Atlas Copco Baukompressor für zügigen Fortschritt auch auf ihrer Baustelle.",
+	"productId": "ACXAS67",
+	"category": 1,
+	"price": 33
+  },
+  {
+	"id": 14,
+	"name":"Bomag BP 20/50 D Vibrationsplatte" ,
+	"description": "Die vorwärtslaufende Vibrationsplatte BP 20/50 D von Bomag ist universell einsetzbar im Erd-, Asphalt- und Pflasterbau. Durch das optimale Verhältnis von Amplitude und Arbeitsgeschwindigkeit wird höchste Wirtschaftlichkeit bei allen Einsätzen erreicht. Durch ihre kompakten Abmessungen kann sie auch in Arbeitsverhältnissen eingesetzt werden, die für andere Verdichtungsgeräte zu beengt sind. Zudem können Ausbesserungsarbeiten im Straßen- und Wegebau und Einsätze unmittelbar entlang von Hauswänden, Mauern und Bordsteinkanten durchgeführt werden.",
+	"productId": "ADU121",
+	"category": 1,
+	"price": 44
+  },
+  {
+	"id": 15,
+	"name":"Norton Junior CM 401 600 Tischsäge" ,
+	"description": "Die Norton Clipper CM 401 Modulo Junior ist eine leistungsstarke und robuste Tischsäge für den Nass- und Trockenschnitt. Materialien wie Stein, Beton und Keramik lassen sich mit dieser elektrischen Säge mühelos trennen. Für den nötigen Komfort sorgt der gefederte Schneidkopf mit Handhebelgriff. Zudem ermöglichen die Parallelhalterung der Schutzhaube und der präzise geführte Rolltisch sicheres und genaues Arbeiten. Die Norton Clipper Steintrennsäge besitzt einen robusten Keilriemenantrieb, der eine optimierte Kraftübertragung garantiert.",
+	"productId": "IASD739",
+	"category": 1,
+	"price": 76
+  },
+  {
+	"id": 16,
+	"name":"Multicar M 27 Pritschenwagen" ,
+	"description": "Das Multicar M 27 verbindet PKW-ähnliche Fahreigenschaften, einschließlich Servolenkung und einer Höchstgeschwindigkeit von 90 km/h, mit kompakten Maßen, die auch den Einsatz in engen Fußgängerzonen, Parks und Obst- und Weinpflanzungen ermöglichen. Der starke Motor erlaubt dabei hohe Nutzlasten bis zu 2,9 Tonnen und eine zulässige Anhängelast bis 3,5 Tonnen.	Die Fahrerkabine wurde ergonomisch designt und mit Komfortfunktionen, wie Klimaanlage und Komfortsitze für Fahrer und Beifahrer, ausgestattet. Die tiefgezogenen Fenster bieten ein großes Sichtfeld und freien Blick auf die Anbaugeräte und die Arbeitsumgebung",
+	"productId": "Zasd234",
+	"category": 2,
+	"price": 100
+  },
+  {
+	"id": 17,
+	"name":"Tandemanhänger" ,
+	"description": "Der Tandemanhänger ist das ideale Transportmittel für Baumaterialien und kleine Baugeräte. Dank seiner robusten Konstruktion aus eloxiertem Aluminium mit Edelstahlverschraubungen und -verschlüssen ist er gut gegen Korrosion geschützt. Die gefederten und gebremsten Achsen des Anhängers gewährleisten, zusammen mit den gewuchteten Reifen und der großen Sicherheitsbeleuchtung,  hohen Fahrkomfort und Fahrsicherheit.",
+	"productId": "TH123A",
+	"category": 2,
+	"price": 20
+  },
+  {
+	"id": 18,
+	"name":"Tandemanhänger XL" ,
+	"description": "Die robuste Aluminiumkonstruktion macht den Tandemanhänger ideal zum Transport von Baumaterialien und Baugeräten. Die Aluminiumbordwände sind eloxiert und die Verschraubung und Verschlüsse sind komplett aus Edelstahl.  Zudem ist seine rutschfeste Bodenplatte aus wasserfest verleimten Birkenholz gefertigt. Somit ist der Anhänger gut gegen Korrosion und Verschleiß geschützt. Dank seiner PKW-Kugelkopfgkupplung ist er auch problemlos von normalen PKWs ziehbar und somit unkompliziert zu nutzen.",
+	"productId": "TH123AXL",
+	"category": 2,
+	"price": 30
+  },
+  {
+	"id": 19,
+	"name":"Stihl TS 420 Trennschleifer" ,
+	"description": "Der Stihl TS 420 Trennschleifer ist ein leichter und handlicher Hand-Trennschleifer mit 350 mm Scheiben. Die Zyklonvorabscheidung des Langzeit-Luftfiltersystems entfernt bereits 80 % der angesaugten Staubpartikel, bevor sie im Schaumfilter gesammelt werden. Dadurch bietet der TS 420 lange Wartungsintervalle und Filterstandzeiten von bis zu einem Jahr. Zudem ist das Arbeiten mit diesem Stihl Trennschleifer sehr kraftschonend, da Pufferelemente die Motorschwingungen auffangen und so die Vibrationen reduzieren.",
+	"productId": "TH12ssS3AXL",
+	"category": 3,
+	"price": 34
+  },
+  {
+	"id": 20,
+	"name":"Lescha SM 145 S Betonmischer" ,
+	"description": "Der Betonmischer Lescha SM 145 S entstammt dem seit Jahrzenten bewährten Premiumprogramm aus dem Hause Lescha und überzeugt durch exzellente Mischergebnisse. Dank seiner kompakten Größe und der einfachen Handhabung ist er ideal für den Heimwerkerbereich und kleinere Baustellen.",
+	"productId": "IAOS765A",
+	"category": 3,
+	"price": 20
+  },
+  {
+	"id": 21,
+	"name":"Heylo Vortex 3000 Axial-Ventilator" ,
+	"description": "Der Heylo Vortex Axialventilator ist ein kompaktes Gebläse, das sich dank nur 15 kg Eigengewicht problemlos transportieren lässt. Dennoch bietet er ausreichend Leistung um mittels anschließbarer Schläuche auch in entfernten Räumen zu Lüften oder zu trocknen.",
+	"productId": "OPAS22",
+	"category": 3,
+	"price": 10
+  },
+  {
+	"id": 22,
+	"name":"Nilfisk-Alto Neptune 4-54X Hochdruckreiniger" ,
+	"description": "Der Neptune 4-54X ist ein Heißwasser-Hochdruckreiniger von Nilfisk-Alto bietet hohe Reinigungseffizienz und lange Lebensdauer. Dabei überzeugt er durch seine leise und stressfreie Arbeitsatmosphäre, einfache Wartung und Servicefreundlichkeit. Das DUO-Motor-System des Nilfisk-Alto Neptune 4-54X lässt im Kaltwasserbetrieb nur einen Motor arbeiten und im Heißwasserbetrieb zwei Motoren. So wird der Materialverschleiß reduziert und Betriebskosten werden gespart.",
+	"productId": "NFja88ASD",
+	"category": 3,
+	"price": 30
+  },
+  {
+	"id": 23,
+	"name":"Sokkia SP1 Kanalbaulaser" ,
+	"description": "Der Sokkia SP1 Rotationslaser ist dank seines robusten Aluminiumgehäuses widerstandsfähig gegenüber mechanischen Belastungen und absolut wasserdicht. Dadurch übersteht er auch ein versehentliches Untertauchen problemlos. Er ist mit einem extra großen Display und einem intuitiven Tastaturfeld ausgerüstet, sodass das Einrichten und Bedienen des Gerätes jederzeit problemlos funktioniert.",
+	"productId": "JK567RE",
+	"category": 3,
+	"price": 10
+  }
+
 ]

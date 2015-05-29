@@ -37,7 +37,10 @@ public class Rental {
         return handler.getProduct(this.productId);
     }
     public boolean isInRent(){
-        return true;
+        if (endDate == null){
+            return true;
+        }
+        return false;
     }
 
     public float currentPrice(){
@@ -46,7 +49,15 @@ public class Rental {
     }
 
     public float getDayCount(){
-        Date now = new Date();
+
+        Date now;
+
+        if (endDate == null){
+            now = new Date();
+        }else{
+            now = endDate;
+        }
+
         int timeDiff = (int)((now.getTime() - startDate.getTime()) / (1000*60*60*24l));
         if (timeDiff == 0){
             return 1.0f;

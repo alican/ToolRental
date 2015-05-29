@@ -147,11 +147,11 @@ public class MainActivity extends ActionBarActivity {
         mRecyclerView.setAdapter(new SlideInBottomAnimationAdapter(mAdapter));
 
         ArrayList<String> categories = new ArrayList<>();
-        categories.add("Alle");
-        categories.add("0");
-        categories.add("1");
-        categories.add("2");
-        categories.add("3");
+        categories.add(getString(R.string.All));
+        categories.add(getString(R.string.Baumaschinen));
+        categories.add(getString(R.string.Baugeraete));
+        categories.add(getString(R.string.Fahrzeuge));
+        categories.add(getString(R.string.Werkzeuge));
 
 
         Spinner categorySpinner = (Spinner) findViewById(R.id.category_spinner);

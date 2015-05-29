@@ -1,6 +1,130 @@
-<android.support.v4.view.ViewPager xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools" android:id="@+id/pager"
-    android:layout_width="match_parent" android:layout_height="match_parent"
-    tools:context="eu.alican.toolrental.RentalsListActivity" >
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:orientation="vertical"
+     android:layout_height="match_parent"
+     android:layout_width="match_parent">
 
-</android.support.v4.view.ViewPager>
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/primary">
+
+        <android.support.v7.widget.CardView
+            xmlns:card_view="http://schemas.android.com/apk/res-auto"
+            xmlns:android="http://schemas.android.com/apk/res/android"
+            android:id="@+id/card_view"
+            android:layout_gravity="center"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            card_view:cardCornerRadius="4dp"
+            android:transitionName="cardViewInfoContainer"
+            card_view:cardPreventCornerOverlap="true"
+            android:foreground="?android:attr/selectableItemBackground"
+            card_view:contentPadding="@dimen/activity_horizontal_margin"
+            android:layout_marginLeft="@dimen/activity_horizontal_margin"
+            android:layout_marginRight="@dimen/activity_horizontal_margin"
+            android:layout_marginTop="@dimen/activity_horizontal_margin"
+            android:layout_margin="@dimen/activity_horizontal_margin">
+
+            <RelativeLayout
+                android:layout_width="fill_parent"
+                android:orientation="vertical"
+                android:layout_height="wrap_content">
+
+                <TextView
+                    android:id="@+id/place_name"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+
+                    android:text="Name"
+                    android:textIsSelectable="false"
+                    android:textSize="24sp" />
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:layout_below="@id/place_name"
+                    android:background="#ffd6d6d6" />
+
+
+                <LinearLayout
+                    android:orientation="vertical"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/activity_vertical_margin"
+                    android:layout_below="@+id/place_name">
+
+                    <LinearLayout
+                        android:orientation="horizontal"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content">
+
+                        <TextView
+                            android:id="@+id/dayPriceText"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+
+                            android:text="Kosten pro Tag"
+                            android:textIsSelectable="false"
+                            android:textSize="18sp"
+
+                            android:layout_weight="1"
+                            android:textStyle="bold" />
+
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:textAppearance="?android:attr/textAppearanceMedium"
+                            android:text="0"
+                            android:id="@+id/dayPrice"
+                            android:layout_weight="1"
+                            android:gravity="right"
+                            android:textStyle="bold" />
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:orientation="horizontal"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="2dp"
+                        >
+
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:textAppearance="?android:attr/textAppearanceMedium"
+                            android:text="Gesamtkosten"
+                            android:id="@+id/totalPriceText"
+                            android:layout_weight="1" />
+
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:textAppearance="?android:attr/textAppearanceMedium"
+                            android:text="0"
+                            android:id="@+id/totalPrice"
+                            android:layout_weight="1"
+                            android:gravity="right" />
+                    </LinearLayout>
+                </LinearLayout>
+
+            </RelativeLayout>
+
+
+        </android.support.v7.widget.CardView>
+    </FrameLayout>
+
+    <com.astuetz.PagerSlidingTabStrip
+        android:id="@+id/tabs"
+        android:layout_width="match_parent"
+        android:layout_height="?attr/actionBarSize"
+        android:background="?attr/colorPrimary" />
+    <android.support.v4.view.ViewPager
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:tools="http://schemas.android.com/tools" android:id="@+id/pager"
+        android:layout_width="match_parent" android:layout_height="match_parent"
+        tools:context="eu.alican.toolrental.RentalsListActivity" >
+
+    </android.support.v4.view.ViewPager>
+</LinearLayout>
+

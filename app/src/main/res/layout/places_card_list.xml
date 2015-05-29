@@ -12,6 +12,7 @@
         card_view:cardCornerRadius="4dp"
         card_view:cardPreventCornerOverlap="true"
         android:foreground="?android:attr/selectableItemBackground"
+        android:transitionName="cardViewInfoContainer"
         android:layout_margin="@dimen/activity_horizontal_margin"
         card_view:contentPadding="@dimen/activity_horizontal_margin">
 
@@ -36,46 +37,36 @@
                 android:background="#ffd6d6d6" />
 
 
-            <TextView
-                android:id="@+id/price"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-
-                android:text="Kosten pro Tag"
-                android:textIsSelectable="false"
-                android:textSize="24sp"
-                android:layout_alignParentBottom="true"
-                android:layout_alignParentStart="true"
-                android:layout_marginBottom="28dp" />
-
             <LinearLayout
                 android:orientation="horizontal"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_below="@+id/place_name"
                 android:layout_alignParentStart="true"
-                android:layout_marginTop="36dp"
+                android:layout_marginTop="25dp"
                 android:id="@+id/linearLayout2">
 
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:textAppearance="?android:attr/textAppearanceLarge"
-                    android:text="0"
                     android:id="@+id/textView4"
                     android:textAlignment="center"
                     android:gravity="center"
-                    android:layout_weight="1" />
+                    android:layout_weight="1"
+                    android:textSize="32sp"
+                    android:text="-" />
 
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:textAppearance="?android:attr/textAppearanceLarge"
-                    android:text="12"
                     android:id="@+id/textView7"
                     android:textAlignment="center"
                     android:gravity="center"
-                    android:layout_weight="1" />
+                    android:layout_weight="1"
+                    android:textSize="32sp"
+                    android:text="-" />
             </LinearLayout>
 
             <LinearLayout
@@ -83,7 +74,8 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_below="@+id/linearLayout2"
-                android:layout_alignParentStart="true">
+                android:layout_alignParentStart="true"
+                android:id="@+id/counterTextView">
 
                 <TextView
                     android:layout_width="fill_parent"
@@ -103,17 +95,74 @@
                     android:layout_weight="1"
                     android:gravity="center" />
             </LinearLayout>
+            <LinearLayout
+                android:orientation="vertical"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_below="@+id/counterTextView"
+                android:layout_marginTop="@dimen/activity_vertical_margin">
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:background="#ffd6d6d6"
+                    android:layout_marginTop="10dp"
+                    android:layout_marginBottom="10dp"
+                    />
 
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:textAppearance="?android:attr/textAppearanceMedium"
-                android:text="Gesamtkosten"
-                android:id="@+id/textView10"
-                android:layout_above="@+id/price"
-                android:layout_alignParentStart="true"
-                android:layout_marginStart="14dp"
-                android:layout_marginBottom="51dp" />
+                <LinearLayout
+                    android:orientation="horizontal"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+                    <TextView
+                        android:id="@+id/dayPriceText"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+
+                        android:text="Kosten pro Tag"
+                        android:textIsSelectable="false"
+                        android:textSize="18sp"
+
+                        android:layout_weight="1"
+                        android:textStyle="bold" />
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:textAppearance="?android:attr/textAppearanceMedium"
+                        android:text="0"
+                        android:id="@+id/dayPrice"
+                        android:layout_weight="1"
+                        android:gravity="right"
+                        android:textStyle="bold" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:orientation="horizontal"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
+                    >
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:textAppearance="?android:attr/textAppearanceMedium"
+                        android:text="Gesamtkosten"
+                        android:id="@+id/totalPriceText"
+                        android:layout_weight="1" />
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:textAppearance="?android:attr/textAppearanceMedium"
+                        android:text="0"
+                        android:id="@+id/totalPrice"
+                        android:layout_weight="1"
+                        android:gravity="right" />
+                </LinearLayout>
+            </LinearLayout>
+
         </RelativeLayout>
 
 

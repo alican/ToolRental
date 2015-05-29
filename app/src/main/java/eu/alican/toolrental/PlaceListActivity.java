@@ -1,11 +1,20 @@
 package eu.alican.toolrental;
 
+import android.app.Activity;
 import android.content.Context;
+import android.content.Intent;
+import android.support.v4.app.ActivityOptionsCompat;
+import android.support.v4.util.Pair;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
+import android.support.v7.widget.CardView;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
+import android.view.Window;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.ImageView;
 import android.widget.ListView;
 
 import java.util.ArrayList;
@@ -24,18 +33,70 @@ public class PlaceListActivity extends ActionBarActivity {
     ListView listView;
     Context context;
 
+
+    View decor;
+    View statusBar;
+    View navBar;
+    View actionBar;
+    List<Pair<View, String>> pairs;
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_place_list);
 
         context = PlaceListActivity.this;
+
+
+
+        decor = ((Activity) context).getWindow().getDecorView();
+        //statusBar = decor.findViewById(android.R.id.statusBarBackground);
+       // navBar = decor.findViewById(android.R.id.navigationBarBackground);
+        actionBar = decor.findViewById(R.id.my_toolbar);
+
+
+
+        pairs = new ArrayList<>();
+       // pairs.add(Pair.create(statusBar, Window.STATUS_BAR_BACKGROUND_TRANSITION_NAME));
+       // pairs.add(Pair.create(navBar, Window.NAVIGATION_BAR_BACKGROUND_TRANSITION_NAME));
+        //pairs.add(Pair.create(actionBar, "tool_bar"));
+
+
+
+    }
+
+    public void fetchData(){
         dbHandler = new MyDbHandler(context, null, null, 1);
         places = dbHandler.getPlaces();
         listView = (ListView) findViewById(R.id.place_list_view);
         placeAdapter = new PlaceListAdapter(context, places);
         listView.setAdapter(placeAdapter);
+        listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
 
+                final CardView cardView = (CardView) view.findViewById(R.id.card_view);
+
+                pairs.add(Pair.create((View) cardView, "cardViewInfoContainer"));
+
+
+                Bundle options = ActivityOptionsCompat.makeSceneTransitionAnimation((Activity) context,
+                        pairs.toArray(new Pair[pairs.size()])).toBundle();
+
+                Intent intent = new Intent(context, RentalsListActivity.class);
+                intent.putExtra("placeID", places.get(position).getId());
+                context.startActivity(intent, options);
+
+            }
+        });
+
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        fetchData();
     }
 
     @Override

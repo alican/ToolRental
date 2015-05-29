@@ -30,7 +30,7 @@ import eu.alican.toolrental.utls.FetchJsonTask;
 public class MyDbHandler extends SQLiteOpenHelper  {
 
     private Context mContext;
-    public static final int DATABASE_VERSION = 15;
+    public static final int DATABASE_VERSION = 16;
     public static final String DATABASE_NAME = "Toolrental.db";
 
     public static abstract class ProductEntry implements BaseColumns{
@@ -148,7 +148,7 @@ public class MyDbHandler extends SQLiteOpenHelper  {
     public void bringBackRental(int rentalId){
         String updateQuery = "UPDATE "+ RentalEntry.TABLE_NAME +
                 " SET "+ RentalEntry.COLUMN_END_DATE +
-                " = date('now') WHERE "+ RentalEntry._ID +" = "+
+                " = datetime('now') WHERE "+ RentalEntry._ID +" = "+
                 rentalId;
         SQLiteDatabase db = this.getReadableDatabase();
         db.execSQL(updateQuery);
@@ -194,13 +194,14 @@ public class MyDbHandler extends SQLiteOpenHelper  {
                 filterString = " ";
                 break;
             case RentalEntry.FILTER_RETURNED:
-                filterString = " WHERE "+ RentalEntry.COLUMN_END_DATE +" IS NOT NULL";
+                filterString = " AND "+ RentalEntry.COLUMN_END_DATE +" IS NOT NULL";
                 break;
             case RentalEntry.FILTER_STILL_BORROWED:
-                filterString = " WHERE "+ RentalEntry.COLUMN_END_DATE +" IS NULL";
+                filterString = " AND "+ RentalEntry.COLUMN_END_DATE +" IS NULL";
         }
 
         String selectQuery = "SELECT  * FROM " + RentalEntry.TABLE_NAME +
+                " WHERE " + RentalEntry.COLUMN_LID + "=" + id +
                 filterString +
                 " ORDER BY "+ RentalEntry.COLUMN_START_DATE +" DESC" ;
 
@@ -215,6 +216,7 @@ public class MyDbHandler extends SQLiteOpenHelper  {
         //2015-05-08 12:54:06
 
         SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+        SimpleDateFormat sdf2 = new SimpleDateFormat("yyyy-MM-dd");
         //SimpleDateFormat sdf = new SimpleDateFormat("EEE MMM dd HH:mm:ss Z yyyy", Locale.getDefault());
 
 
@@ -224,7 +226,7 @@ public class MyDbHandler extends SQLiteOpenHelper  {
         int startDateIndex = cursor.getColumnIndex(RentalEntry.COLUMN_START_DATE);
         int endDateIndex = cursor.getColumnIndex(RentalEntry.COLUMN_END_DATE);
 
-        while(cursor.moveToNext()) {
+        for (cursor.moveToFirst(); !cursor.isAfterLast(); cursor.moveToNext())  {
            // Log.e("asdsadsa", DatabaseUtils.dumpCursorToString(cursor) );
 
             assert cursor != null;
@@ -302,7 +304,7 @@ public class MyDbHandler extends SQLiteOpenHelper  {
         int name = cursor.getColumnIndex(PlaceEntry.COLUMN_NAME);
         int address = cursor.getColumnIndex(PlaceEntry.COLUMN_ADDRESS);
 
-        while(cursor.moveToNext()) {
+        for (cursor.moveToFirst(); !cursor.isAfterLast(); cursor.moveToNext())  {
 
 
             Place place = new Place(
@@ -370,7 +372,7 @@ public class MyDbHandler extends SQLiteOpenHelper  {
         int cat = cursor.getColumnIndex(ProductEntry.COLUMN_CATEGORY);
         int price = cursor.getColumnIndex(ProductEntry.COLUMN_PRICE);
         int desc = cursor.getColumnIndex(ProductEntry.COLUMN_PRICE);
-        while(cursor.moveToNext()) {
+        for (cursor.moveToFirst(); !cursor.isAfterLast(); cursor.moveToNext())  {
 
             Product product = new Product(
                     cursor.getInt(_id),

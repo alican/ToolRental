@@ -17,35 +17,100 @@
         card_view:cardPreventCornerOverlap="true"
         android:foreground="?android:attr/selectableItemBackground"
         android:layout_margin="@dimen/activity_horizontal_margin">
-            <LinearLayout
+            <RelativeLayout
                 android:layout_width="fill_parent"
                 android:orientation="vertical"
-                android:layout_height="wrap_content">
+                android:layout_height="wrap_content"
+                android:padding="@dimen/activity_horizontal_margin">
+
+                <ImageView
+                    android:layout_width="72dp"
+                    android:layout_height="72dp"
+                    android:id="@+id/product_image"
+                    android:layout_marginRight="8dp"
+                    android:src="@drawable/image1"
+                    android:layout_marginLeft="0dp"
+                    android:layout_alignParentTop="true"
+                    android:layout_alignParentStart="true"
+                    android:scaleType="centerInside" />
 
                 <TextView
-                    android:id="@+id/place_name"
+                    android:id="@+id/product_name"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
 
                     android:text="Product Name"
                     android:textIsSelectable="false"
-                    android:textSize="24sp" />
-
-                <ListView
-                    android:layout_width="match_parent"
+                    android:textSize="24sp"
+                    android:layout_alignTop="@+id/product_image"
+                    android:layout_toEndOf="@+id/product_image" />
+                <TextView
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:id="@+id/card_view_list" />
+                    android:textAppearance="?android:attr/textAppearanceMedium"
+                    android:text="Preis pro Tag: "
+                    android:layout_below="@+id/product_image"
+                    android:id="@+id/dayPriceLabel" />
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textAppearance="?android:attr/textAppearanceMedium"
+                    android:text="3 "
+                    android:layout_alignTop="@+id/dayPriceLabel"
+                    android:layout_alignParentRight="true"
+                    android:id="@+id/dayPrice" />
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textAppearance="?android:attr/textAppearanceMedium"
+                    android:text="Ausgeliehene Tage: "
+                    android:layout_below="@+id/dayPriceLabel"
+                    android:id="@+id/daysLabel" />
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textAppearance="?android:attr/textAppearanceMedium"
+                    android:text="3 "
+                    android:layout_alignTop="@+id/daysLabel"
+                    android:layout_alignParentRight="true"
+                    android:id="@+id/days" />
 
                 <TextView
-                    android:id="@+id/price"
-                    android:layout_width="match_parent"
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:textAppearance="?android:attr/textAppearanceMedium"
+                    android:text="Bisherige Kosten: "
+                    android:layout_below="@+id/daysLabel"
+                    android:id="@+id/totalPriceLabel" />
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textAppearance="?android:attr/textAppearanceMedium"
+                    android:layout_alignParentRight="true"
+                    android:text="10 EUR "
+                    android:layout_alignTop="@+id/totalPriceLabel"
+                    android:id="@+id/totalPrice" />
 
-                    android:text="Price"
-                    android:textIsSelectable="false"
-                    android:textSize="24sp" />
-            </LinearLayout>
+                <Button
+                    style="?android:attr/buttonStyleSmall"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/totalPriceLabel"
+                    android:layout_alignParentLeft="true"
+                    android:text="Anschauen"
 
+                    android:id="@+id/bttnOpenProduct" />
 
+                <Button
+                    style="?android:attr/buttonStyleSmall"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Entleihen"
+                    android:id="@+id/bttnCancel"
+                    android:layout_alignTop="@+id/bttnOpenProduct"
+                    android:layout_alignParentRight="true"
+                    />
+
+            </RelativeLayout>
     </android.support.v7.widget.CardView>
 </FrameLayout>

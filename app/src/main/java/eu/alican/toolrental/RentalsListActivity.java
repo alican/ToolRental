@@ -28,6 +28,8 @@ import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.TextView;
 
+import com.astuetz.PagerSlidingTabStrip;
+
 import eu.alican.toolrental.adapter.RentalAdapter;
 import eu.alican.toolrental.db.MyDbHandler;
 import eu.alican.toolrental.models.Place;
@@ -46,15 +48,36 @@ public class RentalsListActivity extends ActionBarActivity {
      */
     SectionsPagerAdapter mSectionsPagerAdapter;
 
+
     /**
      * The {@link ViewPager} that will host the section contents.
      */
     ViewPager mViewPager;
 
+    MyDbHandler dbHandler;
+    public static Place place;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_rentals_list);
+
+
+        // Initialize the ViewPager and set an adapter
+
+
+        // Bind the tabs to the ViewPager
+
+
+
+        dbHandler = new MyDbHandler(this, null, null, 1);
+
+        final int placeID = getIntent().getIntExtra("placeID", -1);
+        place = dbHandler.getPlace(placeID);
+
+        TextView placeName = (TextView) findViewById(R.id.place_name);
+
+        placeName.setText(place.getName());
 
 
         // Create the adapter that will return a fragment for each of the three
@@ -64,6 +87,9 @@ public class RentalsListActivity extends ActionBarActivity {
         // Set up the ViewPager with the sections adapter.
         mViewPager = (ViewPager) findViewById(R.id.pager);
         mViewPager.setAdapter(mSectionsPagerAdapter);
+
+        PagerSlidingTabStrip tabs = (PagerSlidingTabStrip) findViewById(R.id.tabs);
+        tabs.setViewPager(mViewPager);
 
     }
 
@@ -140,7 +166,6 @@ public class RentalsListActivity extends ActionBarActivity {
         private static final String ARG_SECTION_NUMBER = "section_number";
         int sectionNumber;
 
-        ArrayList<Place> places;
 
         /**
          * Returns a new instance of this fragment for the given section
@@ -163,25 +188,9 @@ public class RentalsListActivity extends ActionBarActivity {
                                  Bundle savedInstanceState) {
             View rootView = inflater.inflate(R.layout.fragment_rentals_list, container, false);
             context = getActivity();
-            dbHandler = new MyDbHandler(context, null, null, 1);
 
-            places = dbHandler.getPlaces();
-
-            LinearLayout listViewHolder = (LinearLayout) rootView.findViewById(R.id.listViewHolder);
-            for (int i = 0; i < places.size(); i++){
-                FrameLayout cardView = (FrameLayout) inflater.inflate(R.layout.rental_card_list_item, null, false);
-                TextView placeName = (TextView) cardView.findViewById(R.id.place_name);
-                placeName.setText(places.get(i).getName());
-
-                ListView cardListView = (ListView) cardView.findViewById(R.id.card_view_list);
-                cardListView.setEnabled(false);
-                setRentalList(cardListView);
-
-                listViewHolder.addView(cardView);
-            }
-
-
-           // listView = (ListView) rootView.findViewById(R.id.rentalListView);
+            ListView listView = (ListView) rootView.findViewById(R.id.listView);
+            setRentalList(listView);
 
 
             return rootView;
@@ -205,29 +214,20 @@ public class RentalsListActivity extends ActionBarActivity {
              }
 
 
-            rentals = dbHandler.getRentalsByPlace(0, filterSelection);
+            rentals = dbHandler.getRentalsByPlace(place.getId(), filterSelection);
 
             //rentalAdapter = new RentalAdapter(context, rentals);
-            rentalAdapter = new ArrayAdapter<Rental>(context, android.R.layout.simple_list_item_1, rentals);
+            rentalAdapter = new RentalAdapter(context, rentals);
             cardListView.setAdapter(rentalAdapter);
 
 
-            cardListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-                @Override
-                public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                    Rental rental = rentals.get(position);
-                    rental.bringBack();
-                    rentalAdapter.notifyDataSetChanged();
 
-                }
-            });
 
         }
 
         @Override
         public void onResume() {
             super.onResume();
-         //   setRentalList();
 
         }
     }
